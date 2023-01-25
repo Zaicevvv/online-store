@@ -1,0 +1,19 @@
+.input {
+    width: 100%;
+    height: 70px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+    outline: none;
+    text-indent: 25px;
+    color: var(--gray2) !important;
+  }
+  
+.input::placeholder {
+    font-size: 16px;
+    line-height: 29px;
+    color: var(--gray);
+    text-indent: 25px;
+}

@@ -1,0 +1,65 @@
+.button {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+    border-radius: 6px;
+    padding: 10px 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s ease-in-out;
+
+    overflow: hidden;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    z-index: -1;
+    clip-path: circle(0% at 50% 50%);
+    transition: 0.3s ease-in-out;
+}
+
+.button:hover {
+    color: black;
+    background: white;
+}
+
+.button:hover::before {
+    clip-path: circle(100% at 50% 50%);
+}
+
+.footer {
+    position: fixed;
+    bottom: 100px;
+    z-index: 100;
+    background: #B1B1B1;
+    width: 80vw;
+}
+
+
+
+
+
+.amount {
+    width: 30px;
+}
+
+@media screen and (min-width: 481px) {
+    .footer {
+        bottom: 120px;
+        width: 60vw;
+    }
+}
+
+@media screen and (min-width: 888px) {
+    .footer {
+        bottom: 20px;
+        width: 40vw;
+    }
+}

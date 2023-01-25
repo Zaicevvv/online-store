@@ -1,0 +1,61 @@
+@import './libs/normalize.css';
+@import './libs/reset.css';
+
+body {
+  font-family: 'Sofia Sans', sans-serif;
+  font-weight: 400; /*300, 300 italic, 400, 600*/
+  background: var(--mainGradient);
+}
+
+:root {
+  --body: #F4F7FE;
+  --white: #FFFFFF;
+  --black: #111A39;
+  --black2: #333333;
+  --black3: #1F1F1F;
+  --stroke: #E9EAFE;
+  --stroke2: #F2F2F2;
+  --stroke3: #FAFAFA;
+  --stroke4: #E6E6E6;
+  --gray: #B1B7CA;
+  --gray2: #726F95;
+  --gray3: #9492A5;
+  --gray4: #D6D6D6;
+  --gray5: #4A485E;
+  --gray6: #838383;
+  --primary: #2055FD;
+  --primary2: #1473E6;
+  --violet: #6656F5;
+  --green: #00AD30;
+  --green2: #27AE60;
+  --green2Opcty: rgba(39, 174, 96, 0.2);
+  --green3: #7CC59A;
+  --green3Opcty: rgba(124, 197, 154, 0.2);
+  --orange: #F2994A;
+  --orangeOpcty: rgba(242, 153, 74, 0.2);
+  --red: #E84C4C;
+  --redOpcty: rgba(232, 76, 76, 0.2);
+  --red2: #D95B5B;
+  --datesOption: #E1E8FB;
+  --mainGradient: linear-gradient(#AA6FA8, #6A0487);
+  /* --mainGradient: linear-gradient(#e66465, #9198e5); */
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(46, 58, 230, 0.5);
+  border: 1px solid rgba(46, 58, 230, 0.7);
+
+  animation: button-circle 2s ease forwards;
+}
+
+@keyframes button-circle {
+  0% {
+      transform: scale(0);
+  }
+  100% {
+      transform: scale(20);
+      opacity: 0;
+  }
+}

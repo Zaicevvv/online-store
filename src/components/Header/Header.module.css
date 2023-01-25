@@ -1,0 +1,143 @@
+.header {
+    width: 100%;
+    background: linear-gradient(180deg, #080808 40.82%, rgba(8, 8, 8, 0) 100%);
+    position: fixed;
+    z-index: 2;   
+}
+
+.content{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 105px 20px 50px;
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+    grid-gap: 30px;  
+}
+
+.logo{
+    width: 60px;
+    height: 60px;
+}
+
+.mobLogo {
+    width: 40px;
+    height: 40px;
+}
+   
+.links{
+    display: flex;
+    align-items: center;
+    grid-gap: 33px;        
+}
+
+.link{
+    font-size: 20px;
+    color: #F2F3F7;
+    opacity: 0.7;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold; 
+}
+
+.link:hover {
+    opacity: 1;
+}
+    
+.right{
+    display: flex;
+    align-items: center;
+    grid-gap: 33px;
+}
+    
+.profile{
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+    position: relative;
+}
+
+.burger{
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    position: relative;
+    z-index: 11;
+    display: none;
+}
+
+.toggle{
+    background: rgba(242, 243, 247, 0.2);
+    border: 1.5px solid #FFCB3B;
+    border-radius: 4px;
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 5px;
+    width: 40px;
+    position: relative;
+    height: 40px;    
+    }
+
+.line{
+    width: 18px;
+    border-radius: 4px;
+    height: 2px;
+    background: #ffffff;
+    transition: transform 0.4s ease-in-out;
+}
+
+.line:nth-child(2){
+    transition: transform 0.2s ease-in-out;
+    height: 1.5px;
+}
+
+.mobile_content{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 60px 20px;
+    background: #111111;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    overflow: auto;
+    animation: menu 0.15s ease-in;
+}
+
+.mobLinks{
+    display: flex;
+    grid-gap: 36px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 60px;
+}
+  
+
+@keyframes menu {
+  from{
+    height: 0;
+  }
+  to{
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width: 870px) {
+    .burger {
+        display: flex;
+    }
+    .content {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 870px) {
+    .mobile_content {
+        display: none;
+    }
+} 
