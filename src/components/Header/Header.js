@@ -1,49 +1,124 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { setIsCartOpen } from '../../features/cart/cart'
+import { NavLink, useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo.jpg'
+import miniCart from '../../assets/miniCart.svg'
+import call from '../../assets/call.svg'
 import css from './Header.module.css'
 
 const BasicHeader = () => {
-  const items = useSelector((state) => state.cart.items)
+  const { items, isCartOpen } = useSelector((state) => state.cart)
   const [open, setOpen] = useState(false)
-  const handleClick = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  let w = window.screen.width
+
+  const toggleMenu = () => {
+    isCartOpen && toggleCart()
     setOpen(!open)
+  }
+
+  const toggleCart = () => {
+    open && setOpen(!open)
+    dispatch(setIsCartOpen(!isCartOpen))
+  }
+
+  const handleGoHome = () => {
+    navigate('/')
+    isCartOpen && toggleCart()
   }
 
   return (
     <header className={css.header}>
       <div className={css.content}>
-        <div className={css.nav}>
-          <img alt="Main Logo" src={logo} className={css.logo} />
-          <div className={css.links}>
-            <Link to="/" className={css.link}>
-              Home
-            </Link>
-            <Link to="/products" className={css.link}>
-              Products
-            </Link>
-            <Link to="/about-us" className={css.link}>
-              About us
-            </Link>
-            <Link to="/contacts" className={css.link}>
-              Contacts
-            </Link>
-            <Link to="/articles" className={css.link}>
-              Interesting to read
-            </Link>
-          </div>
-        </div>
-        <div className={css.right}>
-          Cart
-          <span className={css.amount}>
-            {items.length ? items.length : null}
-          </span>
+        <nav className={css.nav}>
+          <img
+            alt="Main Logo"
+            src={logo}
+            className={css.logo}
+            onClick={handleGoHome}
+          />
+          <ul className={css.linksList}>
+            <li className={css.links}>
+              <NavLink
+                to="/"
+                className={({ isActive }) => (isActive ? css.active : css.link)}
+              >
+                Головна
+              </NavLink>
+            </li>
+            <li className={css.links}>
+              <NavLink
+                to="/products"
+                className={({ isActive }) => (isActive ? css.active : css.link)}
+              >
+                Товари
+              </NavLink>
+            </li>
+            <li className={css.links}>
+              <NavLink
+                to="/about-us"
+                className={({ isActive }) => (isActive ? css.active : css.link)}
+              >
+                Про нас та контакти
+              </NavLink>
+            </li>
+            <li className={css.links}>
+              <NavLink
+                to="/articles"
+                className={({ isActive }) => (isActive ? css.active : css.link)}
+              >
+                Цікаві статті
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+        <div className={css.cart}>
+          {w > 1120 ? (
+            <a
+              className={css.link}
+              style={{ opacity: 1, marginRight: '20px' }}
+              href="tel:+380689811557"
+            >
+              +38(068)981-15-57 - Марія
+            </a>
+          ) : (
+            <a href="tel:+380689811557">
+              <img className={css.call} alt="call" src={call} />
+            </a>
+          )}
+          <img
+            className={css.cartImg}
+            alt="cart"
+            src={miniCart}
+            onClick={toggleCart}
+          />
+          {!!items.length && (
+            <div className={css.amountWrapper}>
+              <span className={css.amount}>{items.length}</span>
+            </div>
+          )}
         </div>
       </div>
-      <div onClick={handleClick} className={css.burger}>
-        <img alt="Main Logo" src={logo} className={css.mobLogo} />
+      <div className={css.burger}>
+        <img
+          alt="Main Logo"
+          src={logo}
+          className={css.mobLogo}
+          onClick={handleGoHome}
+        />
+        <div className={css.cart} onClick={toggleCart}>
+          <img className={css.cartImg} alt="cart" src={miniCart} />
+          {!!items.length && (
+            <div className={css.amountWrapper}>
+              <span className={css.amount}>{items.length}</span>
+            </div>
+          )}
+        </div>
         <div
+          onClick={toggleMenu}
           className={`${css.toggle} 
             ${open ? css.toggleOpen : ''}
           `}
@@ -55,31 +130,38 @@ const BasicHeader = () => {
       </div>
       {open && (
         <div className={css.mobile_content}>
-          <div className={css.mobLinks} onClick={handleClick}>
-            <div>
-              Cart
-              <span className={css.amount}>
-                {items.length ? items.length : null}
-              </span>
-            </div>
-            <a className={css.link} href="tel:+380689811557">
-              +38(068)981-15-57 - Мария
+          <div className={css.mobLinks} onClick={toggleMenu}>
+            <a
+              className={css.link}
+              style={{ opacity: 1 }}
+              href="tel:+380689811557"
+            >
+              +38(068)981-15-57 - Марія
             </a>
-            <Link to="/" className={css.link}>
-              Home
-            </Link>
-            <Link to="/products" className={css.link}>
-              Products
-            </Link>
-            <Link to="/" className={css.link}>
-              About us
-            </Link>
-            <Link to="/" className={css.link}>
-              Contacts
-            </Link>
-            <Link to="/" className={css.link}>
-              Interesting to read
-            </Link>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? css.active : css.link)}
+            >
+              Головна
+            </NavLink>
+            <NavLink
+              to="/products"
+              className={({ isActive }) => (isActive ? css.active : css.link)}
+            >
+              Товари
+            </NavLink>
+            <NavLink
+              to="/about-us"
+              className={({ isActive }) => (isActive ? css.active : css.link)}
+            >
+              Про нас та контакти
+            </NavLink>
+            <NavLink
+              to="/articles"
+              className={({ isActive }) => (isActive ? css.active : css.link)}
+            >
+              Цікаві статті
+            </NavLink>
           </div>
         </div>
       )}

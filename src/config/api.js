@@ -1,10 +1,25 @@
-// import axios from 'axios';
-// import { error } from '../helpers/notyf';
+import axios from 'axios'
+import { error } from '../helpers/notyf'
 
-// const URL = process.env.REACT_APP_URL;
-// const WEB_URL = process.env.REACT_APP_WEB_URL;
+const URL = process.env.REACT_APP_BASE_URL
 
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true
+
+const GET_CITIES = (query) =>
+  axios
+    .post(`${URL}/index.php?route=checkout/cart/npcities`, query)
+    .then((response) => response.data)
+    .catch((er) => {
+      error(er)
+    })
+
+const GET_WAREHOUSES = (ref) =>
+  axios
+    .post(`${URL}/index.php?route=checkout/cart/npwarehouses`, ref)
+    .then((response) => response.data)
+    .catch((er) => {
+      error(er)
+    })
 
 // const LOG_IN = credantials =>
 //   axios
@@ -91,19 +106,6 @@
 //       },
 //     )
 //     .then(response => response)
-//     .catch(er => {
-//       error(er);
-//       er.response.status === 401 && window.location.replace('/login');
-//     });
-
-// const GET_GOOGLE_DATA_SOURCES = () =>
-//   axios
-//     .get(`${URL}/google/account/sources/`, {
-//       headers: {
-//         Authorization: `token ${localStorage.getItem('ACCESS_TOKEN')}`,
-//       },
-//     })
-//     .then(response => response.data)
 //     .catch(er => {
 //       error(er);
 //       er.response.status === 401 && window.location.replace('/login');
@@ -391,35 +393,10 @@
 //       er.response.status === 401 && window.location.replace('/login');
 //     });
 
-// const api = {
-//   URL,
-//   LOG_IN,
-//   GET_GOOGLE_LINK,
-//   GET_FACEBOOK_LINK,
-//   SEND_GOOGLE_CODE,
-//   SEND_FACEBOOK_CODE,
-//   GET_GOOGLE_DATA_SOURCES,
-//   GET_FACEBOOK_DATA_SOURCES,
-//   DELETE_GOOGLE_DATA_SOURCE,
-//   GET_ALL_CLIENTS,
-//   GET_ACCOUNTS,
-//   GET_CLIENT_DROPDOWNS,
-//   CREATE_CLIENT,
-//   UPDATE_CLIENT,
-//   GET_CAMPAIGNS,
-//   CHECK_BUDGET_NAME,
-//   CHECK_CLIENT_NAME,
-//   CREATE_BUDGET,
-//   GET_CLIENT_BUDGET_PACING,
-//   GET_BUDGET_BUDGET_PACING,
-//   LOG_OUT,
-//   GET_GOOGLE_DATA_SOURCES_ALL,
-//   DELETE_CLIENT,
-//   DELETE_BUDGET,
-//   GET_CLIENT,
-//   GET_BUDGET,
-//   GET_GRAPH,
-//   GET_ALL_BUDGETS,
-// };
+const api = {
+  URL,
+  GET_CITIES,
+  GET_WAREHOUSES,
+}
 
-// export default api;
+export default api

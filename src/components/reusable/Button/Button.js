@@ -4,6 +4,7 @@ import css from './Button.module.css'
 const Button = ({
   type,
   styled,
+  style,
   onClick,
   title,
   children,
@@ -58,6 +59,7 @@ const Button = ({
     <button
       data-ripple="once"
       type={type}
+      style={style}
       className={`${css.button} ${css[styled]}`}
       onClick={handleClick}
       disabled={disabled}
@@ -68,6 +70,7 @@ const Button = ({
   ) : (
     <button
       type={type}
+      style={style}
       className={`${css.button} ${css[styled]}`}
       onClick={handleClick}
       disabled={disabled}

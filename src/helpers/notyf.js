@@ -6,14 +6,18 @@ const notyf = new Notyf({
   types: [
     {
       type: 'error',
-      backgroundColor: 'grey',
-      message: 'Whoops, something went wrong, please try again!',
+      backgroundColor: '#7c7c7c',
+      message: 'Ойой, щось пішло не так, будь ласка спробуйте ще раз!',
+    },
+    {
+      type: 'success',
+      backgroundColor: '#AA6FA8',
     },
   ],
 })
 
 export const addToCartSuccess = (name) => {
-  notyf.success(`You have successfully added ${name} to cart!`)
+  notyf.success(`Ви успішно добавили ${name} до кошика!`)
 
   return true
 }

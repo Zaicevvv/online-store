@@ -2,13 +2,14 @@
     width: 100%;
     background: linear-gradient(180deg, #080808 40.82%, rgba(8, 8, 8, 0) 100%);
     position: fixed;
-    z-index: 2;   
+    z-index: 3;   
 }
 
 .content{
     display: flex;
     justify-content: space-between;
-    padding: 20px 105px 20px 50px;
+    align-items: center;
+    padding: 20px 50px;
 }
 
 .nav{
@@ -20,36 +21,55 @@
 .logo{
     width: 60px;
     height: 60px;
+    cursor: pointer;
 }
 
 .mobLogo {
     width: 40px;
     height: 40px;
+    cursor: pointer;
 }
    
-.links{
+.linksList{
     display: flex;
     align-items: center;
     grid-gap: 33px;        
 }
 
-.link{
+.link, .active {
+    display: block;
+    position: relative;
+    padding: 5px;
     font-size: 20px;
     color: #F2F3F7;
-    opacity: 0.7;
+    opacity: 0.5;
     text-decoration: none;
     cursor: pointer;
-    font-weight: bold; 
+    font-weight: 600; 
+    transition: 0.3s ease-in-out;
 }
 
-.link:hover {
+.linksList:hover .links .link{
+    transform: scale(1.2);
     opacity: 1;
+    filter: blur(5px)
 }
-    
-.right{
-    display: flex;
-    align-items: center;
-    grid-gap: 33px;
+
+.linksList:hover .links .active{
+    transform: scale(1.2);
+    opacity: 1;
+    filter: blur(0px)
+}
+
+.linksList .links .link:hover {
+    transform: scale(1.2);
+    opacity: 1;
+    filter: blur(0px)
+}
+
+.active {
+    color: var(--red2);
+    opacity: 1;
 }
     
 .profile{
@@ -95,7 +115,7 @@
 }
 
 .mobile_content{
-    position: absolute;
+    position: relative;
     top: 0;
     right: 0;
     left: 0;
@@ -104,7 +124,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    z-index: 10;
+    z-index: 12;
     overflow: auto;
     animation: menu 0.15s ease-in;
 }
@@ -117,6 +137,41 @@
     padding-top: 60px;
 }
   
+.cart {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cartImg, .call {
+    width: 30px;
+    cursor: pointer;
+}
+
+.call {
+    height: 24px;
+    margin-right: 20px;
+}
+
+.amountWrapper {
+    background: var(--red);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.amount {
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 16px;
+    cursor: pointer;
+}
 
 @keyframes menu {
   from{
@@ -127,7 +182,7 @@
   }
 }
 
-@media screen and (max-width: 870px) {
+@media screen and (max-width: 900px) {
     .burger {
         display: flex;
     }
@@ -136,7 +191,7 @@
     }
 }
 
-@media screen and (min-width: 870px) {
+@media screen and (min-width: 901px) {
     .mobile_content {
         display: none;
     }

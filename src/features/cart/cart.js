@@ -1,37 +1,43 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  nameError: false,
-  shortNameError: false,
-  uniqueNameError: false,
-  countryError: false,
-  timezoneError: false,
-  currencyError: false,
+  firstNameError: false,
+  lastNameError: false,
+  telError: false,
+  cityError: false,
+  spotError: false,
   items: [],
   isCartOpen: false,
+  formData: {
+    tel: '',
+    lastName: '',
+    firstName: '',
+    city: '',
+    spot: '',
+    self: false,
+  },
+  radio: '',
+  isToSent: false,
 }
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    setNameError: (state, action) => {
-      state.nameError = action.payload
+    setFirstNameError: (state, action) => {
+      state.firstNameError = action.payload
     },
-    setShortNameError: (state, action) => {
-      state.shortNameError = action.payload
+    setLastNameError: (state, action) => {
+      state.lastNameError = action.payload
     },
-    setUniqueNameError: (state, action) => {
-      state.uniqueNameError = action.payload
+    setTelError: (state, action) => {
+      state.telError = action.payload
     },
-    setCountryError: (state, action) => {
-      state.countryError = action.payload
+    setCityError: (state, action) => {
+      state.cityError = action.payload
     },
-    setTimezoneError: (state, action) => {
-      state.timezoneError = action.payload
-    },
-    setCurrencyError: (state, action) => {
-      state.currencyError = action.payload
+    setSpotError: (state, action) => {
+      state.spotError = action.payload
     },
     setCartItems: (state, action) => {
       state.items = action.payload
@@ -39,18 +45,29 @@ const cartSlice = createSlice({
     setIsCartOpen: (state, action) => {
       state.isCartOpen = action.payload
     },
+    setFormData: (state, action) => {
+      state.formData = action.payload
+    },
+    setRadio: (state, action) => {
+      state.radio = action.payload
+    },
+    setIsToSent: (state, action) => {
+      state.isToSent = action.payload
+    },
   },
 })
 
 export const {
-  setNameError,
-  setShortNameError,
-  setUniqueNameError,
-  setCountryError,
-  setTimezoneError,
-  setCurrencyError,
+  setFirstNameError,
+  setLastNameError,
+  setTelError,
+  setCityError,
+  setSpotError,
   setCartItems,
   setIsCartOpen,
+  setFormData,
+  setRadio,
+  setIsToSent,
 } = cartSlice.actions
 
 export default cartSlice.reducer

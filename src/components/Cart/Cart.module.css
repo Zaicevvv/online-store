@@ -1,0 +1,146 @@
+.wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px;
+    width: 90%;
+    max-height: 84vh;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.06);
+    border-radius: 12px;
+    z-index: 3;
+}
+
+.list {
+    max-height: 53vh;
+    overflow-y: auto;
+}
+
+.listItem {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.img {
+    width: 100px;
+}
+
+.amount {
+    margin: 0 10px;
+    font-weight: 600;
+    font-size: 24px;
+    color: #AA6FA8;
+}
+
+.btnsContainer {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainTitle {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.close {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.delete {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+}
+
+.total {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.empty {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.cartImg {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-60%);
+    width: 120px;
+}
+
+@media screen and (min-width: 481px) {
+    /* .wrapper {
+       max-height: 58vh;
+    }
+
+    .list {
+        max-height: 44vh;
+    } */
+}
+
+@media screen and (min-width: 768px) and (max-width: 888px) {
+    .list {
+        max-height: 58vh;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        /* flex: 0 1 calc(33.3% - 20px); */
+   }
+
+   .footerBtns {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+   }
+}
+@media screen and (min-width: 889px) {
+    .wrapper {
+        width: 70%;
+        max-height: 74vh;
+    }
+
+    .btnsContainer {
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .wrapper {
+        /* flex: 0 1 calc(25% - 20px); */
+   }
+
+   .list {
+      max-height: 46vh;
+   }
+}
+
+@media screen and (min-width: 1280px) {
+    .wrapper {
+        /* flex: 0 1 calc(20% - 20px); */
+   }
+}

@@ -4,7 +4,11 @@
 body {
   font-family: 'Sofia Sans', sans-serif;
   font-weight: 400; /*300, 300 italic, 400, 600*/
-  background: var(--mainGradient);
+  background: url(../assets/brickWall.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 :root {
@@ -37,8 +41,6 @@ body {
   --redOpcty: rgba(232, 76, 76, 0.2);
   --red2: #D95B5B;
   --datesOption: #E1E8FB;
-  --mainGradient: linear-gradient(#AA6FA8, #6A0487);
-  /* --mainGradient: linear-gradient(#e66465, #9198e5); */
 }
 
 .ripple {

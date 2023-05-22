@@ -1,0 +1,128 @@
+.form {
+    margin: 20px 0;
+    padding-right: 20px;
+    max-height: 53vh;
+    overflow-y: auto;
+}
+
+.formHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.formHeaderContainer {
+    display: flex;
+}
+
+.number {
+    background: var(--red);
+    color: var(--white);
+    width: 15px;
+    height: 15px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 12px;
+    line-height: 16px;
+    margin-right: 10px;
+}
+
+.complete {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+}
+
+.mainTitle {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.formTitle {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.required {
+    color: var(--red);
+    font-weight: 600;
+}
+
+.telInput {
+    width: 100%;
+    height: 40px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+    outline: none;
+    text-indent: 10px;
+    color: var(--gray2) !important;
+    margin-bottom: 10px;
+  }
+  
+.telInput::placeholder {
+    font-size: 16px;
+    line-height: 19px;
+    color: var(--gray);
+    text-indent: 10px;
+}
+
+.dn {
+    display: none;
+}
+
+.red {
+    padding: 5px;
+    padding-bottom: 0;
+    border-radius: 6px;
+    border: 2px solid var(--red);
+    margin-bottom: 20px;
+}
+
+.error {
+    color: var(--red);
+    font-size: 12px;
+}
+
+.radioError {
+    color: var(--red);
+}
+
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    margin: 0 20px;
+}
+
+.radio {
+    display: flex;
+    align-items: end;
+}
+
+.label {
+    display: inline-block;
+    margin-top: 10px;
+    padding-left: 10px;
+    line-height: 0.8;
+}
+
+.post {
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 888px) {
+    .form {
+        max-height: 58vh;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .form {
+        max-height: 48vh;
+    }
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCartItems } from '../../features/cart/cart'
+import { setCartItems, setIsCartOpen } from '../../features/cart/cart'
 import { CSSTransition } from 'react-transition-group'
 import Button from '../reusable/Button/Button'
 import { addToCartSuccess } from '../../helpers/notyf'
@@ -9,7 +9,6 @@ import css from './Card.module.css'
 
 const Card = ({ product, i }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  let [amount, setAmount] = useState(1)
   const items = useSelector((state) => state.cart.items)
   const dispatch = useDispatch()
 
@@ -32,22 +31,23 @@ const Card = ({ product, i }) => {
     setIsModalOpen(!isModalOpen)
   }
 
-  const handleIncrement = () => setAmount((amount += 1))
-
-  const handleDecrement = () => {
-    if (amount < 2) return
-    setAmount((amount -= 1))
-  }
-
   const handleAddToCart = () => {
-    dispatch(setCartItems([...items, product]))
-    addToCartSuccess(product.name)
-    if (w < 768)
+    if (items.find((item) => item.id === product.id)) {
       setTimeout(() => {
         setIsModalOpen(!isModalOpen)
+        dispatch(setIsCartOpen(true))
       }, 300)
-    // setTimeout приводит к тому, что несколько модалок открываются за раз,
-    // если кликнуть и увести мышь на другую карточку
+
+      return
+    }
+
+    dispatch(setCartItems([...items, { ...product, amount: 1 }]))
+    addToCartSuccess(product.name)
+
+    setTimeout(() => {
+      setIsModalOpen(!isModalOpen)
+      dispatch(setIsCartOpen(true))
+    }, 300)
   }
 
   return (
@@ -82,15 +82,8 @@ const Card = ({ product, i }) => {
               <p className={css.bigName}>{product.name}</p>
               <p className={css.bigPrice}>{product.price}</p>
             </div>
-            {/* <Button styled="amount" onClick={handleDecrement}>
-                -
-              </Button>
-              <span className={css.amount}>{amount}</span>
-              <Button styled="amount" onClick={handleIncrement}>
-                +
-              </Button> */}
             <Button styled="addToCart" rippled onClick={handleAddToCart}>
-              Add to cart
+              Додати у кошик
             </Button>
           </div>
         </div>

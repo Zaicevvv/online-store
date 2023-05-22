@@ -199,7 +199,6 @@ const ProductsPage = () => {
 
   return (
     <main className={css.main}>
-      <div className={css.parallax}></div>
       <section className={css.cardList}>
         {products.map((product, i) => (
           <Card key={product.id} i={i} product={product} />

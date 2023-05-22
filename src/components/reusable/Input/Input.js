@@ -1,5 +1,5 @@
-import React from 'react';
-import css from './Input.module.css';
+import React from 'react'
+import css from './Input.module.css'
 
 const Input = ({
   type,
@@ -9,11 +9,13 @@ const Input = ({
   name,
   readOnly,
   styled,
+  style,
   required,
 }) => (
   <input
     name={name}
     type={type}
+    style={style}
     className={`${css.input} ${css[styled]}`}
     value={value}
     placeholder={placeholder}
@@ -21,6 +23,6 @@ const Input = ({
     readOnly={readOnly}
     required={required}
   />
-);
+)
 
-export default Input;
+export default Input

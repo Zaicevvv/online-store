@@ -1,5 +1,5 @@
 .button {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 18px;
     line-height: 22px;
     border: 2px solid white;
@@ -42,18 +42,54 @@
     width: 80vw;
 }
 
+.checkout, .checkout2 {
+    color: #AA6FA8;
+    border-color: #AA6FA8;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+}
 
+.checkout2 {
+    margin-bottom: 10px;
+}
 
-
+.back {
+    color: #7c7c7c;
+    border-color: #7c7c7c;
+    margin: 0 auto;
+    display: block;
+}
 
 .amount {
+    color: #AA6FA8;
+    border-color: #AA6FA8;
     width: 30px;
+    padding: 0;
+    padding: 3px;
+}
+
+.change {
+    font-size: 16px;
+    padding: 0 5px;
+    border: none;
+    color: #AA6FA8;
 }
 
 @media screen and (min-width: 481px) {
     .footer {
         bottom: 120px;
         width: 60vw;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .checkout, .back {
+        margin: 0;
+    }
+
+    .back {
+        margin-right: 20px;
     }
 }
 
