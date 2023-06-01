@@ -18,6 +18,7 @@ const initialState = {
   },
   radio: '',
   isToSent: false,
+  isLoading: false,
 }
 
 const cartSlice = createSlice({
@@ -54,6 +55,9 @@ const cartSlice = createSlice({
     setIsToSent: (state, action) => {
       state.isToSent = action.payload
     },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload
+    },
   },
 })
 
@@ -68,6 +72,7 @@ export const {
   setFormData,
   setRadio,
   setIsToSent,
+  setIsLoading,
 } = cartSlice.actions
 
 export default cartSlice.reducer

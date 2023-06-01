@@ -32,7 +32,7 @@ const Card = ({ product, i }) => {
   }
 
   const handleAddToCart = () => {
-    if (items.find((item) => item.id === product.id)) {
+    if (items.find((item) => item.id === product.product_id)) {
       setTimeout(() => {
         setIsModalOpen(!isModalOpen)
         dispatch(setIsCartOpen(true))
@@ -52,19 +52,26 @@ const Card = ({ product, i }) => {
 
   return (
     <article
-      className={css.wrapper}
+      className={`${css.wrapper} ${
+        items.find((item) => item.product_id === product.product_id)
+          ? css.green
+          : ''
+      }`}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
       onClick={handleHover}
     >
       <div
         className={css.img}
-        style={{ backgroundImage: `url(${product.img})` }}
+        style={{ backgroundImage: `url(${product.thumb})` }}
       ></div>
       <p className={css.name}>{product.name}</p>
       <p className={css.price}>{product.price}</p>
       <CSSTransition
-        in={isModalOpen}
+        in={
+          isModalOpen &&
+          !items.find((item) => item.product_id === product.product_id)
+        }
         timeout={200}
         classNames={CardTransition}
         unmountOnExit
@@ -73,7 +80,7 @@ const Card = ({ product, i }) => {
           <div className={css.container}>
             <div
               className={`${css.img} ${css.bigImg}`}
-              style={{ backgroundImage: `url(${product.img})` }}
+              style={{ backgroundImage: `url(${product.thumb})` }}
             ></div>
             <p className={css.description}>{product.description}</p>
           </div>

@@ -17,7 +17,7 @@ const Cart = () => {
   const handleIncrement = (id, e) => {
     let newItems = [...items]
     newItems = newItems.map((item) => {
-      if (item.id === id) {
+      if (item.product_id === id) {
         return { ...item, amount: +item.amount + 1 }
       } else return item
     })
@@ -25,11 +25,11 @@ const Cart = () => {
   }
 
   const handleDecrement = (id, e) => {
-    if (items.find((item) => item.id === id).amount < 2) return
+    if (items.find((item) => item.product_id === id).amount < 2) return
 
     let newItems = [...items]
     newItems = newItems.map((item) => {
-      if (item.id === id) {
+      if (item.product_id === id) {
         return { ...item, amount: +item.amount - 1 }
       } else return item
     })
@@ -39,7 +39,14 @@ const Cart = () => {
   const handleCheckout = () =>
     setTimeout(
       () =>
-        stage === 1 ? setStage(2) : isToSent && console.log(items, formData),
+        stage === 1
+          ? setStage(2)
+          : isToSent &&
+            console.log(items, {
+              ...formData,
+              city: formData.city.label,
+              spot: formData.spot.label,
+            }),
       300,
     )
 
@@ -54,100 +61,102 @@ const Cart = () => {
 
   const handleDelete = (id, e) => {
     let newItems = [...items]
-    newItems = newItems.filter((item) => item.id !== id)
+    newItems = newItems.filter((item) => item.product_id !== id)
     dispatch(setCartItems(newItems))
   }
 
   return (
-    <div className={css.wrapper}>
-      <div className={css.header}>
-        <h1 className={css.mainTitle}>
-          {stage === 1 ? 'Кошик' : 'Оформлення замовлення'}
-        </h1>
-        <img
-          className={css.close}
-          alt="close"
-          src={cancel}
-          onClick={handleClose}
-        />
-      </div>
-      {stage === 1 && (
-        <>
-          {items.length ? (
-            <ul className={css.list}>
-              {items.map((item) => (
-                <li key={item.id} className={css.listItem}>
-                  <img
-                    className={css.delete}
-                    alt="delete"
-                    src={cancel}
-                    onClick={handleDelete.bind(this, item.id)}
-                  />
-                  <div className={css.product}>
-                    <img className={css.img} alt="product" src={item.img} />
-                    <h2>{item.name}</h2>
-                    <h2>{item.price}</h2>
-                  </div>
-                  <div className={css.btnsContainer}>
-                    <Button
-                      styled="amount"
-                      onClick={handleDecrement.bind(this, item.id)}
-                    >
-                      -
-                    </Button>
-                    <span className={css.amount}>{item.amount}</span>
-                    <Button
-                      styled="amount"
-                      onClick={handleIncrement.bind(this, item.id)}
-                    >
-                      +
-                    </Button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <>
-              <img className={css.cartImg} alt="cart" src={cart} />
-              <h2 className={css.empty}>В кошику немає товарів</h2>
-            </>
-          )}
-        </>
-      )}
-      {stage === 2 && <Form />}
-      {stage === 1 && items.length > 0 && (
-        <p className={css.total}>
-          До оплаты без доставки:{' '}
-          {items.reduce(
-            (acc, item) => (acc = acc + +item.price.slice(0, -1) * item.amount),
-            0,
-          )}
-          $
-        </p>
-      )}
-      {!!items.length ? (
-        <div className={css.footerBtns}>
-          <Button styled="checkout" rippled onClick={handleCheckout}>
-            Оформити замовлення
-          </Button>
+    <div className={css.overlay}>
+      <div className={css.wrapper}>
+        <div className={css.header}>
+          <h1 className={css.mainTitle}>
+            {stage === 1 ? 'Кошик' : 'Оформлення замовлення'}
+          </h1>
+          <img
+            className={css.close}
+            alt="close"
+            src={cancel}
+            onClick={handleClose}
+          />
+        </div>
+        {stage === 1 && (
+          <>
+            {items.length > 0 ? (
+              <ul className={css.list}>
+                {items.map((item) => (
+                  <li key={item.product_id} className={css.listItem}>
+                    <img
+                      className={css.delete}
+                      alt="delete"
+                      src={cancel}
+                      onClick={handleDelete.bind(this, item.product_id)}
+                    />
+                    <div className={css.product}>
+                      <img className={css.img} alt="product" src={item.thumb} />
+                      <h2>{item.name}</h2>
+                      <h2>{item.price}</h2>
+                    </div>
+                    <div className={css.btnsContainer}>
+                      <Button
+                        styled="amount"
+                        onClick={handleDecrement.bind(this, item.product_id)}
+                      >
+                        -
+                      </Button>
+                      <span className={css.amount}>{item.amount}</span>
+                      <Button
+                        styled="amount"
+                        onClick={handleIncrement.bind(this, item.product_id)}
+                      >
+                        +
+                      </Button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <>
+                <img className={css.cartImg} alt="cart" src={cart} />
+                <h2 className={css.empty}>В кошику немає товарів</h2>
+              </>
+            )}
+          </>
+        )}
+        {stage === 2 && <Form />}
+        {stage === 1 && items.length > 0 && (
+          <p className={css.total}>
+            До оплаты без доставки: $
+            {items.reduce(
+              (acc, item) =>
+                (acc = acc + +item.price.substring(1) * item.amount),
+              0,
+            )}
+          </p>
+        )}
+        {items.length > 0 ? (
+          <div className={css.footerBtns}>
+            <Button styled="checkout" rippled onClick={handleCheckout}>
+              Оформити замовлення
+            </Button>
+            <Button
+              styled="back"
+              rippled
+              onClick={stage === 1 ? handleGoToProducts : handleBack}
+            >
+              {stage === 1 ? 'До товарів' : 'До кошика'}
+            </Button>
+          </div>
+        ) : (
           <Button
             styled="back"
+            style={{ margin: '0 auto' }}
             rippled
-            onClick={stage === 1 ? handleGoToProducts : handleBack}
+            onClick={handleGoToProducts}
           >
-            {stage === 1 ? 'До товарів' : 'До кошика'}
+            До товарів
           </Button>
-        </div>
-      ) : (
-        <Button
-          styled="back"
-          style={{ margin: '0 auto' }}
-          rippled
-          onClick={handleGoToProducts}
-        >
-          До товарів
-        </Button>
-      )}
+        )}
+      </div>
     </div>
   )
 }

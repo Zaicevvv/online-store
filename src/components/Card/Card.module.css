@@ -8,7 +8,12 @@
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    padding: 8px;
+    padding-bottom: 8px;
+}
+
+.green {
+    background: linear-gradient(135deg, rgba(83, 255, 60, 0.4), rgba(83, 255, 60, 0.1));
+    border: 1px solid rgba(83, 255, 60, 0.18);
 }
 
 .bigWrapper {
@@ -94,6 +99,7 @@
 @media screen and (min-width: 768px) {
     .wrapper {
         flex: 0 1 calc(33.3% - 20px);
+        padding: 8px;
    }
 
    .bigWrapper {

@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setIsCartOpen } from '../../features/cart/cart'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
 import logo from '../../assets/logo.jpg'
 import miniCart from '../../assets/miniCart.svg'
 import call from '../../assets/call.svg'
+import HeaderTransition from './HeaderTransition.module.css'
 import css from './Header.module.css'
 
 const BasicHeader = () => {
@@ -128,7 +130,12 @@ const BasicHeader = () => {
           <span className={css.line}></span>
         </div>
       </div>
-      {open && (
+      <CSSTransition
+        in={open}
+        timeout={200}
+        classNames={HeaderTransition}
+        unmountOnExit
+      >
         <div className={css.mobile_content}>
           <div className={css.mobLinks} onClick={toggleMenu}>
             <a
@@ -164,7 +171,7 @@ const BasicHeader = () => {
             </NavLink>
           </div>
         </div>
-      )}
+      </CSSTransition>
     </header>
   )
 }

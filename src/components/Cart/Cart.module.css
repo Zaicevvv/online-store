@@ -1,3 +1,12 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
 .wrapper {
     position: fixed;
     top: 50%;
@@ -15,6 +24,7 @@
 .list {
     max-height: 53vh;
     overflow-y: auto;
+    padding: 0 10px;
 }
 
 .listItem {
@@ -37,7 +47,7 @@
 }
 
 .btnsContainer {
-    width: 40%;
+    width: 120px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -108,8 +118,8 @@
 }
 
 @media screen and (min-width: 768px) {
-    .wrapper {
-        /* flex: 0 1 calc(33.3% - 20px); */
+    .list {
+        padding: 0 20px;
    }
 
    .footerBtns {
@@ -125,7 +135,7 @@
     }
 
     .btnsContainer {
-        width: 30%;
+        /* width: 30%; */
     }
 }
 

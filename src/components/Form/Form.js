@@ -13,11 +13,11 @@ import {
   setSpotError,
   setRadio,
   setIsToSent,
+  setIsLoading,
 } from '../../features/cart/cart'
 import { useNavigate } from 'react-router-dom'
 import ok from '../../assets/ok.svg'
 import api from '../../config/api'
-import npres from './новаПоштаresponse.json'
 import css from './Form.module.css'
 
 const Form = () => {
@@ -34,6 +34,7 @@ const Form = () => {
   const [contactDetails, setContactDetails] = useState(false)
   const [deliveryDetails, setDeliveryDetails] = useState(false)
   const [radioError, setRadioError] = useState(false)
+  const [spots, setSpots] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -85,43 +86,50 @@ const Form = () => {
     dispatch(setRadio(e.target.value))
   }
 
-  const onCityChange = (value) =>
+  const onCityChange = (value) => {
     dispatch(setFormData({ ...formData, city: value }))
 
+    let warehouses = []
+    dispatch(setIsLoading(true))
+    api
+      .GET_WAREHOUSES(value.value)
+      .then((res) => {
+        warehouses = res.map((el) => {
+          return { label: el.Description, value: el.Number }
+        })
+
+        setSpots(warehouses)
+      })
+      .finally(() => dispatch(setIsLoading(false)))
+  }
+
+  const handleCityChange = () =>
+    dispatch(setFormData({ ...formData, city: '', spot: '' }))
+
+  const handleSpotChange = () =>
+    dispatch(setFormData({ ...formData, spot: '' }))
+
   const onCityInput = (value, callback) => {
-    if (!value) {
+    if (!value || value.length < 3) {
       callback([])
       return
     }
     let options = []
-    api.GET_CITIES({ query: value }).then(
-      (res) =>
-        (options = res.map((el) => {
+    dispatch(setIsLoading(true))
+    api
+      .GET_CITIES(value)
+      .then((res) => {
+        options = res.map((el) => {
           return { label: el.Description, value: el.Ref }
-        })),
-    )
+        })
 
-    callback(options)
+        callback(options)
+      })
+      .finally(() => dispatch(setIsLoading(false)))
   }
 
   const onSpotChange = (value) =>
     dispatch(setFormData({ ...formData, spot: value }))
-
-  const onSpotInput = (value, callback) => {
-    if (!value) {
-      callback([])
-      return
-    }
-    let options = []
-    api.GET_WAREHOUSES({ query: value, ref: formData.city.value }).then(
-      (res) =>
-        (options = res.map((el) => {
-          return { label: el.Description, value: el.Description }
-        })),
-    )
-
-    callback(options)
-  }
 
   return (
     <form className={css.form} onSubmit={handleSubmit}>
@@ -228,32 +236,49 @@ const Form = () => {
             <div className={css.post}>
               <p className={css.formTitle}>Населений пункт</p>
               <span className={css.required}>*</span>
+              {formData.city && (
+                <Button styled="change" onClick={handleCityChange}>
+                  Змінити
+                </Button>
+              )}
               {cityError && (
                 <p className={css.error}>Будь ласка оберіть населений пункт</p>
               )}
-              <Select
-                name="city"
-                defaultValue="Введіть населений пункт"
-                value={formData.city || ''}
-                onChange={onCityChange}
-                async
-                options={onCityInput}
-              />
+              {formData.city ? (
+                <p className={css.selected}>{formData.city.label}</p>
+              ) : (
+                <Select
+                  name="city"
+                  defaultValue="Введіть населений пункт (мінімум три літери)"
+                  value={formData.city || ''}
+                  onChange={onCityChange}
+                  async
+                  options={onCityInput}
+                />
+              )}
               {formData.city && (
                 <>
                   <p className={css.formTitle}>Відділення</p>
                   <span className={css.required}>*</span>
+                  {formData.spot && (
+                    <Button styled="change" onClick={handleSpotChange}>
+                      Змінити
+                    </Button>
+                  )}
                   {spotError && (
                     <p className={css.error}>Будь ласка оберіть відділення</p>
                   )}
-                  <Select
-                    name="spot"
-                    defaultValue="Оберіть відділення"
-                    value={formData.spot || ''}
-                    onChange={onSpotChange}
-                    async
-                    options={onSpotInput}
-                  />
+                  {formData.spot ? (
+                    <p className={css.selected}>{formData.spot.label}</p>
+                  ) : (
+                    <Select
+                      name="spot"
+                      defaultValue="Оберіть відділення"
+                      value={formData.spot || ''}
+                      onChange={onSpotChange}
+                      options={spots}
+                    />
+                  )}
                 </>
               )}
             </div>

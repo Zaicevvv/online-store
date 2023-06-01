@@ -24,9 +24,11 @@ const Select = ({
     {async ? (
       <AsyncSelect
         components={{ NoOptionsMessage }}
+        loadingMessage={() => 'Завантаження...'}
+        cacheOptions
         name={name}
         loadOptions={options}
-        onChange={(e) => onChange(e)}
+        onChange={onChange}
         placeholder={defaultValue}
         classNamePrefix="modal"
         maxMenuHeight={260}

@@ -1,0 +1,21 @@
+.enter {
+    height: 0vh;
+    opacity: 0;
+  }
+  
+  .enterActive {
+    height: 100vh;
+    opacity: 1;
+    transition: all .2s linear;
+  }
+  
+  .exit {
+    height: 100vh;
+    opacity: 1;
+  }
+  
+  .exitActive {
+    height: 0vh;
+    opacity: 0;
+    transition: all .2s linear;
+  }

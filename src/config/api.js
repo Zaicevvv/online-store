@@ -3,11 +3,25 @@ import { error } from '../helpers/notyf'
 
 const URL = process.env.REACT_APP_BASE_URL
 
-axios.defaults.withCredentials = true
+const GET_PRODUCTS = () =>
+  axios
+    .get(`${URL}/index.php?route=product/category&path=59`)
+    .then((response) => response.data.products)
+    .catch((er) => {
+      error(er)
+    })
+
+const GET_PRODUCT = (id) =>
+  axios
+    .get(`${URL}/index.php?route=product/product&product_id=${id}`)
+    .then((response) => response.data)
+    .catch((er) => {
+      error(er)
+    })
 
 const GET_CITIES = (query) =>
   axios
-    .post(`${URL}/index.php?route=checkout/cart/npcities`, query)
+    .get(`${URL}/index.php?route=checkout/cart/npcities&query=${query}`)
     .then((response) => response.data)
     .catch((er) => {
       error(er)
@@ -15,7 +29,7 @@ const GET_CITIES = (query) =>
 
 const GET_WAREHOUSES = (ref) =>
   axios
-    .post(`${URL}/index.php?route=checkout/cart/npwarehouses`, ref)
+    .get(`${URL}/index.php?route=checkout/cart/npwarehouses&ref=${ref}`)
     .then((response) => response.data)
     .catch((er) => {
       error(er)
@@ -395,6 +409,8 @@ const GET_WAREHOUSES = (ref) =>
 
 const api = {
   URL,
+  GET_PRODUCTS,
+  GET_PRODUCT,
   GET_CITIES,
   GET_WAREHOUSES,
 }

@@ -2,7 +2,7 @@
     width: 100%;
     background: linear-gradient(180deg, #080808 40.82%, rgba(8, 8, 8, 0) 100%);
     position: fixed;
-    z-index: 3;   
+    z-index: 4;   
 }
 
 .content{
@@ -120,13 +120,14 @@
     right: 0;
     left: 0;
     padding: 60px 20px;
-    background: #111111;
+    background: rgba(0, 0, 0, 0.5);
     height: 100vh;
     display: flex;
     flex-direction: column;
     z-index: 12;
     overflow: auto;
-    animation: menu 0.15s ease-in;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .mobLinks{
@@ -171,15 +172,6 @@
     font-size: 12px;
     line-height: 16px;
     cursor: pointer;
-}
-
-@keyframes menu {
-  from{
-    height: 0;
-  }
-  to{
-    height: 100vh;
-  }
 }
 
 @media screen and (max-width: 900px) {
