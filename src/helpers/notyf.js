@@ -22,6 +22,12 @@ export const addToCartSuccess = (name) => {
   return true
 }
 
+export const checkoutSuccess = () => {
+  notyf.success('Дякуємо, Ваше замовлення прийняте! Ми Вам зателефонуємо.')
+
+  return true
+}
+
 export const error = (data) => {
   notyf.error(data.message)
 }

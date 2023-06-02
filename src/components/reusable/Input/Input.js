@@ -11,6 +11,7 @@ const Input = ({
   styled,
   style,
   required,
+  autofocus,
 }) => (
   <input
     name={name}
@@ -22,6 +23,7 @@ const Input = ({
     onChange={onChange}
     readOnly={readOnly}
     required={required}
+    autoFocus={autofocus}
   />
 )
 

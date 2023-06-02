@@ -68,6 +68,11 @@
     width: 40px;
     height: 40px;
     cursor: pointer;
+    transition: all 0.3s;
+}
+
+.close:hover {
+    transform: scale(1.2);
 }
 
 .delete {
@@ -75,7 +80,12 @@
     height: 20px;
     cursor: pointer;
     position: absolute;
-    top: 0;
+    top: 2px;
+    transition: all 0.3s;
+}
+
+.delete:hover {
+    transform: scale(1.2);
 }
 
 .total {

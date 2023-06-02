@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import Button from '../reusable/Button/Button'
 import Form from '../Form/Form'
-import { useSelector, useDispatch } from 'react-redux'
 import { setCartItems, setIsCartOpen } from '../../features/cart/cart'
-import { useNavigate } from 'react-router-dom'
 import cancel from '../../assets/cancel.svg'
 import cart from '../../assets/cart.svg'
+import { checkoutSuccess } from '../../helpers/notyf'
 import css from './Cart.module.css'
 
 const Cart = () => {
@@ -17,7 +18,7 @@ const Cart = () => {
   const handleIncrement = (id, e) => {
     let newItems = [...items]
     newItems = newItems.map((item) => {
-      if (item.product_id === id) {
+      if (+item.product_id === +id) {
         return { ...item, amount: +item.amount + 1 }
       } else return item
     })
@@ -25,11 +26,11 @@ const Cart = () => {
   }
 
   const handleDecrement = (id, e) => {
-    if (items.find((item) => item.product_id === id).amount < 2) return
+    if (items.find((item) => +item.product_id === +id).amount < 2) return
 
     let newItems = [...items]
     newItems = newItems.map((item) => {
-      if (item.product_id === id) {
+      if (+item.product_id === +id) {
         return { ...item, amount: +item.amount - 1 }
       } else return item
     })
@@ -42,11 +43,13 @@ const Cart = () => {
         stage === 1
           ? setStage(2)
           : isToSent &&
-            console.log(items, {
-              ...formData,
-              city: formData.city.label,
-              spot: formData.spot.label,
-            }),
+            checkoutSuccess() &&
+            // console.log(items, {
+            //   ...formData,
+            //   city: formData.city.label,
+            //   spot: formData.spot.label,
+            // }) &&
+            handleClose(),
       300,
     )
 
@@ -61,7 +64,7 @@ const Cart = () => {
 
   const handleDelete = (id, e) => {
     let newItems = [...items]
-    newItems = newItems.filter((item) => item.product_id !== id)
+    newItems = newItems.filter((item) => +item.product_id !== +id)
     dispatch(setCartItems(newItems))
   }
 
@@ -128,7 +131,7 @@ const Cart = () => {
             До оплаты без доставки: $
             {items.reduce(
               (acc, item) =>
-                (acc = acc + +item.price.substring(1) * item.amount),
+                (acc = acc + +item.price.substring(1) * +item.amount),
               0,
             )}
           </p>

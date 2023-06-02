@@ -14,6 +14,19 @@
     border: 1px solid rgba(83, 255, 60, 0.18);
 }
 
+.info {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 32px;
+    height: 32px;
+    transition: all 0.3s;
+}
+
+.info:hover {
+    transform: scale(1.2);
+}
+
 .bigWrapper {
     z-index: 2;
     display: flex;

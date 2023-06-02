@@ -18,3 +18,17 @@
     color: var(--gray);
     text-indent: 10px;
 }
+
+.search {
+  max-width: 320px;
+  background: #F5F8FF;
+  background-image: url(../../../assets/search.svg);
+  background-repeat: no-repeat;
+  background-position: 96% center;
+  appearance: none;
+  margin-bottom: 0;
+}
+
+.search::placeholder {
+  color: rgb(74, 72, 94, 0.5);
+}

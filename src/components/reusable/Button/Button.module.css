@@ -96,6 +96,23 @@
     margin-bottom: 10px;
 }
 
+.category {
+    padding: 5px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    opacity: 0.8;
+}
+
+.category:hover {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 1);
+    opacity: 1;
+}
+
+.category:hover::before {
+    clip-path: circle(0% at 50% 50%);
+}
+
 @media screen and (min-width: 481px) {
     .footer {
         bottom: 120px;

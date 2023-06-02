@@ -26,4 +26,9 @@
     bottom: 30px;
     width: 40px;
     height: 40px;
+    transition: all 0.3s;
+  }
+
+  .anchor:hover {
+    transform: scale(1.2);
   }

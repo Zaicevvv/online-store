@@ -3,6 +3,7 @@ import css from './Button.module.css'
 
 const Button = ({
   type,
+  name,
   styled,
   style,
   onClick,
@@ -57,6 +58,7 @@ const Button = ({
 
   return rippled ? (
     <button
+      name={name}
       data-ripple="once"
       type={type}
       style={style}
@@ -69,6 +71,7 @@ const Button = ({
     </button>
   ) : (
     <button
+      name={name}
       type={type}
       style={style}
       className={`${css.button} ${css[styled]}`}

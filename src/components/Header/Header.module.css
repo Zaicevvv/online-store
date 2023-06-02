@@ -2,7 +2,7 @@
     width: 100%;
     background: linear-gradient(180deg, #080808 40.82%, rgba(8, 8, 8, 0) 100%);
     position: fixed;
-    z-index: 4;   
+    z-index: 4;
 }
 
 .content{
@@ -117,32 +117,6 @@
     stroke-dashoffset: -31;
 }
 
-/* .toggle{
-    background: rgba(242, 243, 247, 0.2);
-    border: 1.5px solid #FFCB3B;
-    border-radius: 4px;
-    padding: 10px 10px;
-    display: flex;
-    flex-direction: column;
-    grid-gap: 5px;
-    width: 40px;
-    position: relative;
-    height: 40px;    
-    }
-
-.line{
-    width: 18px;
-    border-radius: 4px;
-    height: 2px;
-    background: #ffffff;
-    transition: transform 0.4s ease-in-out;
-}
-
-.line:nth-child(2){
-    transition: transform 0.2s ease-in-out;
-    height: 1.5px;
-} */
-
 .mobile_content{
     position: relative;
     top: 0;
@@ -176,11 +150,16 @@
 .cartImg, .call {
     width: 30px;
     cursor: pointer;
+    transition: all 0.3s;
 }
 
 .call {
     height: 24px;
     margin-right: 20px;
+}
+
+.cartImg:hover, .call:hover {
+    transform: scale(1.2);
 }
 
 .amountWrapper {

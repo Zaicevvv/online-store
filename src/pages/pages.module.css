@@ -4,6 +4,26 @@
     min-height: calc(100vh - 134px);
 }
 
+.productsEmpty {
+    font-size: 30px;
+    color: var(--white);
+    text-align: center;
+    padding-top: 10px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 .cardList {
     padding-top: 40px;
     display: grid;
@@ -15,7 +35,60 @@
     padding-top: 40px;
 }
 
-.aboutInfoSection, .aboutContactSection {
+.productWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.productContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.productImg {
+    max-width: 350px;
+}
+
+.productName {
+    font-weight: 600;
+    font-size: 30px;
+    color: white;
+}
+
+.productPrice {
+    font-weight: 600;
+    font-size: 24px;
+    color: white;
+}
+
+.productDescription > h1 {
+    font-size: 24px;
+}
+
+.productDescription > * {
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.productDescription > strong, .productDescription > * > strong {
+    font-size: 20px;
+    display: block;
+}
+
+.productLink {
+    font-size: 20px;
+    color: #F2F3F7;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.aboutInfoSection, .aboutContactSection, .productDescription {
     padding: 20px;
     background: rgba(255,255,255,0.8);
     box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.06);
@@ -50,6 +123,17 @@
         padding-bottom: 20px;
         min-height: calc(100vh - 94px);
     }
+
+    .productMedia {
+        display: flex;
+        align-items: start;
+    }
+
+    .productWrapper {
+        position: sticky;
+        top: 64px;
+        width: auto;
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -67,5 +151,16 @@
 
     .aboutInfoSection {
         margin-bottom: 0;
+    }
+
+    .productMedia {
+        display: flex;
+        align-items: start;
+    }
+
+    .productWrapper {
+        position: sticky;
+        top: 64px;
+        width: auto;
     }
 }

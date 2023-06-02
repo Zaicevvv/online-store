@@ -4,6 +4,7 @@ import { setCartItems, setIsCartOpen } from '../../features/cart/cart'
 import { CSSTransition } from 'react-transition-group'
 import Button from '../reusable/Button/Button'
 import { addToCartSuccess } from '../../helpers/notyf'
+import information from '../../assets/info.png'
 import CardTransition from './CardTransition.module.css'
 import css from './Card.module.css'
 
@@ -42,15 +43,6 @@ const Card = ({ product, i }) => {
   }
 
   const handleAddToCart = () => {
-    if (items.find((item) => item.id === product.product_id)) {
-      setTimeout(() => {
-        setIsModalOpen(!isModalOpen)
-        dispatch(setIsCartOpen(true))
-      }, 300)
-
-      return
-    }
-
     dispatch(setCartItems([...items, { ...product, amount: 1 }]))
     addToCartSuccess(product.name)
 
@@ -63,7 +55,7 @@ const Card = ({ product, i }) => {
   return (
     <article
       className={`${css.wrapper} ${
-        items.find((item) => item.product_id === product.product_id)
+        items.find((item) => +item.product_id === +product.product_id)
           ? css.green
           : ''
       }`}
@@ -71,6 +63,11 @@ const Card = ({ product, i }) => {
       onMouseLeave={handleHover}
       onClick={handleHover}
     >
+      {items.find((item) => +item.product_id === +product.product_id) && (
+        <a className={css.info} href={`product/${product.product_id}`}>
+          <img alt="Information" src={information} />
+        </a>
+      )}
       <div
         className={css.img}
         style={{ backgroundImage: `url(${product.thumb})` }}
@@ -80,7 +77,7 @@ const Card = ({ product, i }) => {
       <CSSTransition
         in={
           isModalOpen &&
-          !items.find((item) => item.product_id === product.product_id)
+          !items.find((item) => +item.product_id === +product.product_id)
         }
         timeout={200}
         classNames={CardTransition}
@@ -88,6 +85,9 @@ const Card = ({ product, i }) => {
       >
         <div className={`${css.bigWrapper} ${isRight()}`}>
           <div className={css.container}>
+            <a className={css.info} href={`product/${product.product_id}`}>
+              <img alt="Information" src={information} />
+            </a>
             <div
               className={`${css.img} ${css.bigImg}`}
               style={{ backgroundImage: `url(${product.thumb})` }}
