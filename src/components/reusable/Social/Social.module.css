@@ -6,6 +6,10 @@
     padding-top: 10px;
 }
 
+.footer li a {
+    color: var(--white);
+}
+
 .link {
     display: flex;
     flex-direction: column;

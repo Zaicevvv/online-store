@@ -5,8 +5,8 @@ import viber from '../../../assets/viber.png'
 import whatsapp from '../../../assets/whatsapp.png'
 import css from './Social.module.css'
 
-const Social = () => (
-  <ul className={css.wrapper}>
+const Social = ({ footer }) => (
+  <ul className={`${css.wrapper} ${footer ? css.footer : ''}`}>
     <li>
       <a className={css.link} href="mailto:vitaline.foodforlife@gmail.co">
         <img className={css.icon} alt="gmail" src={gmail} />

@@ -6,9 +6,10 @@ import Header from './components/Header/Header'
 import ProductsPage from './pages/ProductsPage'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
-import CartButton from './components/CartButton/CartButton'
 import Cart from './components/Cart/Cart'
 import Loader from './components/Loader/Loader'
+import Footer from './components/Footer/Footer'
+import top from './assets/top.svg'
 import CardTransition from '../src/components/Card/CardTransition.module.css'
 
 const App = () => {
@@ -34,7 +35,10 @@ const App = () => {
         <Cart />
       </CSSTransition>
       {isLoading && <Loader />}
-      {/* <CartButton /> */}
+      {!isLoading && <Footer />}
+      <a className={CardTransition.anchor} href="#top">
+        <img alt="To top" src={top} />
+      </a>
     </>
   )
 }

@@ -135,7 +135,12 @@ const Cart = () => {
         )}
         {items.length > 0 ? (
           <div className={css.footerBtns}>
-            <Button styled="checkout" rippled onClick={handleCheckout}>
+            <Button
+              styled={!isToSent && stage === 2 ? 'disabled' : 'checkout'}
+              disabled={!isToSent && stage === 2}
+              rippled
+              onClick={handleCheckout}
+            >
               Оформити замовлення
             </Button>
             <Button

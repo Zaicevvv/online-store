@@ -66,8 +66,8 @@ const Form = () => {
     }
 
     if (radio === 'post' && (!formData.city || !formData.spot)) {
-      !formData.city && dispatch(setCityError(true))
-      !formData.spot && dispatch(setSpotError(true))
+      if (!formData.city) return dispatch(setCityError(true))
+      if (!formData.spot) return dispatch(setSpotError(true))
 
       return
     }
@@ -110,10 +110,12 @@ const Form = () => {
     dispatch(setFormData({ ...formData, spot: '' }))
 
   const onCityInput = (value, callback) => {
+    if (value) dispatch(setCityError(false))
     if (!value || value.length < 3) {
       callback([])
       return
     }
+
     let options = []
     dispatch(setIsLoading(true))
     api
@@ -128,8 +130,10 @@ const Form = () => {
       .finally(() => dispatch(setIsLoading(false)))
   }
 
-  const onSpotChange = (value) =>
+  const onSpotChange = (value) => {
+    dispatch(setSpotError(false))
     dispatch(setFormData({ ...formData, spot: value }))
+  }
 
   return (
     <form className={css.form} onSubmit={handleSubmit}>
@@ -149,7 +153,13 @@ const Form = () => {
           </Button>
         )}
       </div>
-      <div className={`${css.container} ${contactDetails ? css.dn : css.red}`}>
+      <div
+        className={`${css.container} ${contactDetails ? css.dn : css.red} ${
+          formData.tel && formData.firstName && formData.lastName
+            ? css.green
+            : ''
+        }`}
+      >
         <p className={css.formTitle}>Телефон</p>
         <span className={css.required}>*</span>
         {telError && (
@@ -186,7 +196,14 @@ const Form = () => {
           value={formData.firstName || ''}
           onChange={onChange}
         />
-        <Button styled="checkout2" onClick={handleContactDetails}>
+        <Button
+          styled={
+            formData.tel && formData.firstName && formData.lastName
+              ? 'checkout2'
+              : 'disabled2'
+          }
+          onClick={handleContactDetails}
+        >
           Продовжити
         </Button>
       </div>
@@ -211,6 +228,8 @@ const Form = () => {
       <div
         className={`${css.container} ${
           deliveryDetails || !contactDetails ? css.dn : css.red
+        } ${
+          radio === 'self' || (formData.city && formData.spot) ? css.green : ''
         }`}
       >
         <div className={css.radioGroup}>
@@ -297,7 +316,14 @@ const Form = () => {
             </label>
           </div>
         </div>
-        <Button styled="checkout2" onClick={handleDeliveryDetails}>
+        <Button
+          styled={
+            radio === 'self' || (formData.city && formData.spot)
+              ? 'checkout2'
+              : 'disabled2'
+          }
+          onClick={handleDeliveryDetails}
+        >
           Продовжити
         </Button>
       </div>

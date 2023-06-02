@@ -1,7 +1,12 @@
 @import './libs/normalize.css';
 @import './libs/reset.css';
 
+html {
+  scroll-behavior: smooth;
+  }
+
 body {
+  min-height: 100vh;
   font-family: 'Sofia Sans', sans-serif;
   font-weight: 400; /*300, 300 italic, 400, 600*/
   background: url(../assets/brickWall.jpg);
@@ -9,6 +14,10 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+}
+
+body #root {
+  min-height: 100vh;
 }
 
 :root {

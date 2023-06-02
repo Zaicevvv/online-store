@@ -84,7 +84,7 @@ const BasicHeader = () => {
               style={{ opacity: 1, marginRight: '20px' }}
               href="tel:+380689811557"
             >
-              +38(068)981-15-57 - Марія
+              +38(068) 981-15-57 - Марія
             </a>
           ) : (
             <a href="tel:+380689811557">
@@ -104,7 +104,7 @@ const BasicHeader = () => {
           )}
         </div>
       </div>
-      <div className={css.burger}>
+      <div className={css.mobHeader}>
         <img
           alt="Main Logo"
           src={logo}
@@ -119,16 +119,25 @@ const BasicHeader = () => {
             </div>
           )}
         </div>
-        <div
-          onClick={toggleMenu}
-          className={`${css.toggle} 
-            ${open ? css.toggleOpen : ''}
-          `}
-        >
-          <span className={css.line}></span>
-          <span className={css.line}></span>
-          <span className={css.line}></span>
-        </div>
+        {/* <div className={css.menuWrapper}> */}
+        <button onClick={toggleMenu} className={css.menuButton}>
+          <svg
+            stroke="var(--white)"
+            fill="none"
+            className={`${css.menuBurger} ${open && css.menuBurgerActive}`}
+            viewBox="-5 -5 40 40"
+            width="35"
+          >
+            <path
+              className={`${css.menuLine} ${open && css.menuLineActive}`}
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m 4.5 11 h 20 a 1 1 0 0 1 0 7 h -20 a 1 1 0 0 1 0 -12 h 10 v 22"
+            ></path>
+          </svg>
+        </button>
+        {/* </div> */}
       </div>
       <CSSTransition
         in={open}
@@ -143,7 +152,7 @@ const BasicHeader = () => {
               style={{ opacity: 1 }}
               href="tel:+380689811557"
             >
-              +38(068)981-15-57 - Марія
+              +38(068) 981-15-57 - Марія
             </a>
             <NavLink
               to="/"

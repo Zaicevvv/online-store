@@ -12,17 +12,27 @@ const Card = ({ product, i }) => {
   const items = useSelector((state) => state.cart.items)
   const dispatch = useDispatch()
 
-  let w = window.screen.width
+  let w = window.innerWidth
 
   const isRight = () => {
-    if (w < 768) {
+    if (w < 515) {
       if (i % 2) return css.right
-    } else if (w < 1024) {
+    } else if (w < 680) {
       if (i % 3 === 2) return css.right
-    } else if (w < 1280) {
+    } else if (w < 925) {
       if (i % 4 === 3) return css.right
-    } else {
+    } else if (w < 1170) {
       if (i % 5 === 4) return css.right
+    } else if (w < 1335) {
+      if (i % 6 === 5) return css.right
+    } else if (w < 1500) {
+      if (i % 7 === 6) return css.right
+    } else if (w < 1665) {
+      if (i % 8 === 7) return css.right
+    } else if (w < 1830) {
+      if (i % 9 === 8) return css.right
+    } else {
+      if (i % 10 === 9) return css.right
     }
   }
 
