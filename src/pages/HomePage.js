@@ -19,11 +19,7 @@ const HomePage = () => {
 
   return (
     <main className={css.parallax}>
-      <section
-        className={css.layers}
-        onMouseMove={mouseMove}
-        // onMouseLeave={mouseLeave}
-      >
+      <section className={css.layers} onMouseMove={mouseMove}>
         <div className={css.layers__container}>
           <div className={`${css.layers__item} ${css.layer_1}`}></div>
           <div className={`${css.layers__item} ${css.layer_2}`}></div>
