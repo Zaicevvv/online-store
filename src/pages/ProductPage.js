@@ -38,7 +38,10 @@ const ProductPage = () => {
     setTimeout(() => dispatch(setIsCartOpen(true)), 300)
   }
 
-  const handleGoToProducts = () => navigate('/products')
+  const handleGoToProducts = () =>
+    setTimeout(() => {
+      navigate('/products')
+    }, 300)
 
   return (
     <main className={css.main}>

@@ -20,7 +20,7 @@ const Select = ({
   defaultValue,
   async,
 }) => (
-  <div className={css.container}>
+  <div className={`${css.container} ${styled ? css.mb : ''}`}>
     {async ? (
       <AsyncSelect
         components={{ NoOptionsMessage }}
@@ -47,6 +47,7 @@ const Select = ({
         maxMenuHeight={260}
         menuPlacement="auto"
         value={value}
+        className={css[styled]}
       />
     )}
   </div>

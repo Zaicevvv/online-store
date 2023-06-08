@@ -117,11 +117,107 @@
     margin-bottom: 5px;
 }
 
+/* parallax styles */
+
+.parallax {
+    background-color: var(--black3);
+}
+
+.layers {
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.layers__container {
+    height: 100vh;
+    transform-style: preserve-3d;
+    transform: rotateX(var(--move-y)) rotateY(var(--move-x));
+    will-change: transform;
+    transition: transform var(--transition);
+}
+
+.layers__item {
+    position: absolute;
+    inset: -5vw;
+    background-size: cover;
+    background-position: center;
+}
+
+.layer_1 {
+    background-image: url(../assets/parallax/layer1.jpg);
+    transform: 
+        translateZ(-55px) 
+        scale(1.06);
+}
+
+.layer_2 {
+    background-image: url(../assets/parallax/layer2.png);
+    transform: 
+        translateZ(80px)
+        scale(0.88);
+}
+
+.layer_3 {
+    transform: 
+        translateZ(180px)
+        scale(0.8);
+    display: grid;
+    place-items: center;
+}
+
+.layer_4 {
+    transform: 
+        translateZ(190px)
+        scale(0.9);
+}
+
+.layer_5 {
+    background-image: url(../assets/parallax/layer5.png);
+    transform: 
+        translateZ(300px)
+        scale(0.8);
+}
+
+.layer_6 {
+    background-image: url(../assets/parallax/layer6.png);
+    transform: translateZ(380px);
+}
+
+.hero_content {
+    display: grid;
+    place-items: center;
+    padding: 10vw;
+}
+
+.hero_content__title, .hero_content__text {
+    font-family: kamerik-3d;
+    color: rgb(255 255 255 / 0.9);
+    font-size: calc(var(--index) * 5);
+    letter-spacing: calc(var(--index) * -0.2);
+    line-height: 0.8;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero_content__text {
+    font-size: calc(var(--index) * 4);
+    letter-spacing: calc(var(--index) * -0.1);
+}
+
+.layer_4, .layer_5, .layer_6 {
+    pointer-events: none;
+}
+
 @media screen and (min-width: 768px) {
     .main {
         padding: 100px 60px;
         padding-bottom: 20px;
         min-height: calc(100vh - 94px);
+    }
+
+    .nav {
+        flex-direction: row;
+        justify-content: start;
     }
 
     .productMedia {

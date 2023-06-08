@@ -11,7 +11,7 @@
     cursor: pointer;
     position: relative;
     transition: 0.3s ease-in-out;
-
+    outline: none;
     overflow: hidden;
 }
 
@@ -111,6 +111,13 @@
 
 .category:hover::before {
     clip-path: circle(0% at 50% 50%);
+}
+
+.main {
+    padding: var(--index) calc(var(--index) * 2);
+    font-size: calc(var(--index) * 1.5);
+    color: rgb(255 255 255 / 0.9);
+    border-color: rgb(255 255 255 / 0.9);
 }
 
 @media screen and (min-width: 481px) {

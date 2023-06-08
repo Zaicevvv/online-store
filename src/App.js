@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import Header from './components/Header/Header'
@@ -15,10 +15,11 @@ import CardTransition from '../src/components/Card/CardTransition.module.css'
 
 const App = () => {
   const { isCartOpen, isLoading } = useSelector((state) => state.cart)
+  const location = useLocation()
 
   return (
     <>
-      <Header />
+      {location.pathname !== '/' && <Header />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />
@@ -36,10 +37,12 @@ const App = () => {
         <Cart />
       </CSSTransition>
       {isLoading && <Loader />}
-      {!isLoading && <Footer />}
-      <a className={CardTransition.anchor} href="#top">
-        <img alt="To top" src={top} />
-      </a>
+      {!isLoading && location.pathname !== '/' && <Footer />}
+      {location.pathname !== '/' && (
+        <a className={CardTransition.anchor} href="#top">
+          <img alt="To top" src={top} />
+        </a>
+      )}
     </>
   )
 }

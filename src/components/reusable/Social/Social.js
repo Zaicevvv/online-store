@@ -14,7 +14,7 @@ const Social = ({ footer }) => (
       </a>
     </li>
     <li>
-      <a className={css.link} href="/products">
+      <a className={css.link} href="https://instagram.com/vitaline_foodforlife">
         <img className={css.icon} alt="instagram" src={instagram} />
         Instagram
       </a>

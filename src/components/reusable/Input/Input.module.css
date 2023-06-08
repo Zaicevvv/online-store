@@ -20,15 +20,17 @@
 }
 
 .search {
+  height: 38px;
   max-width: 320px;
-  background: #F5F8FF;
+  border-radius: 4px;
+  background: var(--white);
   background-image: url(../../../assets/search.svg);
   background-repeat: no-repeat;
-  background-position: 96% center;
+  background-position: 97% center;
   appearance: none;
   margin-bottom: 0;
 }
 
 .search::placeholder {
-  color: rgb(74, 72, 94, 0.5);
+  color: rgb(74, 72, 94, 0.8);
 }

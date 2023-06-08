@@ -58,8 +58,10 @@ const Cart = () => {
   const handleBack = () => setStage(stage - 1)
 
   const handleGoToProducts = () => {
-    navigate('products')
-    handleClose()
+    setTimeout(() => {
+      navigate('products')
+      handleClose()
+    }, 300)
   }
 
   const handleDelete = (id, e) => {
