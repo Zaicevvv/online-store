@@ -18,19 +18,3 @@
     color: var(--gray);
     text-indent: 10px;
 }
-
-.search {
-  height: 38px;
-  max-width: 320px;
-  border-radius: 4px;
-  background: var(--white);
-  background-image: url(../../../assets/search.svg);
-  background-repeat: no-repeat;
-  background-position: 97% center;
-  appearance: none;
-  margin-bottom: 0;
-}
-
-.search::placeholder {
-  color: rgb(74, 72, 94, 0.8);
-}

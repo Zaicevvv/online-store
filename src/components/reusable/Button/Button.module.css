@@ -120,6 +120,11 @@
     border-color: rgb(255 255 255 / 0.9);
 }
 
+.invert {
+    color: var(--black3);
+    border-color: var(--black3);
+}
+
 @media screen and (min-width: 481px) {
     .footer {
         bottom: 120px;

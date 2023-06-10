@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import rain from '../parallaxHelpers/rain'
-import { mouseMove, mouseLeave } from '../parallaxHelpers/mouseTracking'
+import { mouseMove } from '../parallaxHelpers/mouseTracking'
 import { useNavigate } from 'react-router-dom'
 import Button from '../components/reusable/Button/Button'
 import css from './pages.module.css'

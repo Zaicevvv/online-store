@@ -43,6 +43,10 @@ const Card = ({ product, i }) => {
   }
 
   const handleAddToCart = () => {
+    localStorage.setItem(
+      'items',
+      JSON.stringify([...items, { ...product, amount: 1 }]),
+    )
     dispatch(setCartItems([...items, { ...product, amount: 1 }]))
     addToCartSuccess(product.name)
 
@@ -72,8 +76,10 @@ const Card = ({ product, i }) => {
         className={css.img}
         style={{ backgroundImage: `url(${product.thumb})` }}
       ></div>
-      <p className={css.name}>{product.name}</p>
-      <p className={css.price}>{product.price}</p>
+      <div>
+        <p className={css.name}>{product.name}</p>
+        <p className={css.price}>{product.price}</p>
+      </div>
       <CSSTransition
         in={
           isModalOpen &&
@@ -92,13 +98,13 @@ const Card = ({ product, i }) => {
               className={`${css.img} ${css.bigImg}`}
               style={{ backgroundImage: `url(${product.thumb})` }}
             ></div>
-            <p className={css.description}>{product.description}</p>
-          </div>
-          <div className={css.jcsb_aic}>
             <div>
               <p className={css.bigName}>{product.name}</p>
-              <p className={css.bigPrice}>{product.price}</p>
+              <p className={css.description}>{product.meta_description}</p>
             </div>
+          </div>
+          <div className={css.jcsb_aic}>
+            <p className={css.bigPrice}>{product.price}</p>
             <Button styled="addToCart" rippled onClick={handleAddToCart}>
               Додати у кошик
             </Button>

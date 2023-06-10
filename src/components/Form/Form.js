@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { PhoneInput } from '@ua-opendata/react-phone-input'
 import Button from '../reusable/Button/Button'
 import Input from '../reusable/Input/Input'
@@ -38,6 +38,21 @@ const Form = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  useEffect(() => {
+    if (formData.tel && formData.firstName && formData.lastName)
+      setContactDetails(true)
+    if (radio) {
+      if (formData.self === true) {
+        setDeliveryDetails(true)
+        dispatch(setIsToSent(true))
+      }
+      if (formData.city && formData.spot) {
+        setDeliveryDetails(true)
+        dispatch(setIsToSent(true))
+      }
+    }
+  }, [])
+
   const onChange = (e) => {
     e.target.name === 'tel' && dispatch(setTelError(false))
     e.target.name === 'lastName' && dispatch(setLastNameError(false))
@@ -45,6 +60,10 @@ const Form = () => {
     e.target.name === 'city' && dispatch(setCityError(false))
     e.target.name === 'spot' && dispatch(setSpotError(false))
     dispatch(setFormData({ ...formData, [e.target.name]: e.target.value }))
+    localStorage.setItem(
+      'formData',
+      JSON.stringify({ ...formData, [e.target.name]: e.target.value }),
+    )
   }
 
   const handleContactDetails = () => {
@@ -72,22 +91,36 @@ const Form = () => {
       return
     }
 
-    if (radio === 'self') dispatch(setFormData({ ...formData, self: true }))
+    if (radio === 'self') {
+      dispatch(setFormData({ ...formData, self: true }))
+      localStorage.setItem(
+        'formData',
+        JSON.stringify({ ...formData, self: true }),
+      )
+    }
     setDeliveryDetails(!deliveryDetails)
     dispatch(setIsToSent(!isToSent))
   }
 
-  const handleSubmit = (e) => e.preventDefault()
-
   const handleRadio = (e) => {
-    if (e.target.value === 'post')
+    if (e.target.value === 'post') {
       dispatch(setFormData({ ...formData, self: false }))
+      localStorage.setItem(
+        'formData',
+        JSON.stringify({ ...formData, self: false }),
+      )
+    }
     setRadioError(false)
     dispatch(setRadio(e.target.value))
+    localStorage.setItem('radio', JSON.stringify(e.target.value))
   }
 
   const onCityChange = (value) => {
     dispatch(setFormData({ ...formData, city: value }))
+    localStorage.setItem(
+      'formData',
+      JSON.stringify({ ...formData, city: value }),
+    )
 
     let warehouses = []
     dispatch(setIsLoading(true))
@@ -103,11 +136,18 @@ const Form = () => {
       .finally(() => dispatch(setIsLoading(false)))
   }
 
-  const handleCityChange = () =>
+  const handleCityChange = () => {
     dispatch(setFormData({ ...formData, city: '', spot: '' }))
+    localStorage.setItem(
+      'formData',
+      JSON.stringify({ ...formData, city: '', spot: '' }),
+    )
+  }
 
-  const handleSpotChange = () =>
+  const handleSpotChange = () => {
     dispatch(setFormData({ ...formData, spot: '' }))
+    localStorage.setItem('formData', JSON.stringify({ ...formData, spot: '' }))
+  }
 
   const onCityInput = (value, callback) => {
     if (value) dispatch(setCityError(false))
@@ -133,10 +173,14 @@ const Form = () => {
   const onSpotChange = (value) => {
     dispatch(setSpotError(false))
     dispatch(setFormData({ ...formData, spot: value }))
+    localStorage.setItem(
+      'formData',
+      JSON.stringify({ ...formData, spot: value }),
+    )
   }
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
+    <form className={css.form}>
       <div className={css.formHeader}>
         <div className={css.formHeaderContainer}>
           {!contactDetails ? (
@@ -229,7 +273,10 @@ const Form = () => {
         className={`${css.container} ${
           deliveryDetails || !contactDetails ? css.dn : css.red
         } ${
-          radio === 'self' || (formData.city && formData.spot) ? css.green : ''
+          radio === 'self' ||
+          (formData.city && formData.spot && radio === 'post')
+            ? css.green
+            : ''
         }`}
       >
         <div className={css.radioGroup}>
@@ -253,7 +300,7 @@ const Form = () => {
           </div>
           {radio === 'post' && (
             <div className={css.post}>
-              <p className={css.formTitle}>Населений пункт</p>
+              <p className={`${css.formTitle} ${css.small}`}>Населений пункт</p>
               <span className={css.required}>*</span>
               {formData.city && (
                 <Button styled="change" onClick={handleCityChange}>
@@ -277,7 +324,7 @@ const Form = () => {
               )}
               {formData.city && (
                 <>
-                  <p className={css.formTitle}>Відділення</p>
+                  <p className={`${css.formTitle} ${css.small}`}>Відділення</p>
                   <span className={css.required}>*</span>
                   {formData.spot && (
                     <Button styled="change" onClick={handleSpotChange}>

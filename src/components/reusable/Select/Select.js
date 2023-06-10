@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactSelect, { components } from 'react-select'
 import AsyncSelect from 'react-select/async'
+import search from '../../../assets/search.svg'
 import css from './Select.module.css'
 
 const NoOptionsMessage = (props) => {
@@ -8,6 +9,16 @@ const NoOptionsMessage = (props) => {
     <components.NoOptionsMessage {...props}>
       <span>Нічого не знайдено</span>
     </components.NoOptionsMessage>
+  )
+}
+
+const DropdownIndicator = (props) => {
+  return (
+    components.DropdownIndicator && (
+      <components.DropdownIndicator {...props}>
+        <img alt="timezone" src={search} />
+      </components.DropdownIndicator>
+    )
   )
 }
 
@@ -23,7 +34,7 @@ const Select = ({
   <div className={`${css.container} ${styled ? css.mb : ''}`}>
     {async ? (
       <AsyncSelect
-        components={{ NoOptionsMessage }}
+        components={{ NoOptionsMessage, DropdownIndicator }}
         loadingMessage={() => 'Завантаження...'}
         cacheOptions
         name={name}
@@ -37,7 +48,7 @@ const Select = ({
       />
     ) : (
       <ReactSelect
-        components={{ NoOptionsMessage }}
+        components={{ NoOptionsMessage, DropdownIndicator }}
         name={name}
         options={options}
         onChange={onChange}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setIsLoading } from '../features/cart/cart'
 import Input from '../components/reusable/Input/Input'
@@ -17,47 +18,46 @@ const options = [
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([])
-  const [search, setSearch] = useState('')
+  const [page, setPage] = useState('')
   const [category, setCategory] = useState('')
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const getProducts = () => {
+  useEffect(() => {
     dispatch(setIsLoading(true))
     api
-      .GET_PRODUCTS()
+      .GET_PRODUCTS(page)
       .then((res) =>
         setProducts(res.map((el) => ({ ...el, price: el.price.slice(0, -3) }))),
       )
       .finally(() => dispatch(setIsLoading(false)))
-  }
+  }, [page])
 
-  useEffect(() => {
-    if (search) {
-      if (search.length < 3) return
-
-      dispatch(setIsLoading(true))
-      api
-        .GET_SEARCHED_PRODUCTS(search)
-        .then((res) =>
-          setProducts(
-            res.map((el) => ({ ...el, price: el.price.slice(0, -3) })),
-          ),
-        )
-        .finally(() => dispatch(setIsLoading(false)))
-
+  const handleSearch = (value, callback) => {
+    if (!value) {
+      callback([])
       return
     }
 
-    getProducts()
-  }, [search])
+    let options = []
+    dispatch(setIsLoading(true))
+    api
+      .GET_SEARCHED_PRODUCTS(value)
+      .then((res) => {
+        options = res.map((el) => {
+          return { label: el.name, value: el.product_id }
+        })
 
-  const handleSearch = (e) => setSearch(e.target.value)
+        callback(options)
+      })
+      .finally(() => dispatch(setIsLoading(false)))
+  }
 
   const handleCategory = (value) => {
     if (+value.value === 59) {
       setCategory('')
-      getProducts()
+      // getProducts()
 
       return
     }
@@ -66,34 +66,28 @@ const ProductsPage = () => {
     console.log(value.value)
   }
 
+  const goToProduct = (product) => navigate(`/product/${product.value}`)
+
+  const handlePagination = (e) => setPage(e.target.value)
+
   return (
     <main className={css.main}>
       <div className={css.nav}>
-        <Input
-          styled="search"
-          placeholder="Пошук..."
-          autofocus
-          value={search}
-          onChange={handleSearch}
-        />
         <Select
+          styled
+          defaultValue="Пошук..."
+          async
+          options={handleSearch}
+          onChange={goToProduct}
+        />
+        {/* <Select
           styled="categories"
           defaultValue="Категорії..."
           onChange={handleCategory}
           options={options}
           value={category}
-        />
-        {/* <div className={css.categories} onClick={handleCategory}>
-          <Button styled="category" name="Протизапальне" rippled>
-            Протизапальне
-          </Button>
-          <Button styled="category" name="Протизапальне" rippled>
-            Противірусне
-          </Button>
-          <Button styled="category" name="Протизапальне" rippled>
-            Протипаразитарне
-          </Button>
-        </div> */}
+        /> */}
+        <Input value={page} onChange={handlePagination} />
       </div>
       <section className={css.cardList}>
         {products.length > 0 ? (

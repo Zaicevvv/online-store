@@ -19,7 +19,7 @@ const ProductPage = () => {
   useEffect(() => {
     api.GET_PRODUCT(params.id).then((res) => {
       setData({ ...res, price: res.price.slice(0, -3) })
-      myRef.current.innerHTML = '<h1>Опис:</h1>' + res.description
+      myRef.current.innerHTML = `<h1>Опис:</h1>  <p>${res.meta_description}</p>  ${res.description}`
     })
   }, [params.id])
 
@@ -30,6 +30,10 @@ const ProductPage = () => {
       return
     }
 
+    localStorage.setItem(
+      'items',
+      JSON.stringify([...items, { ...data, amount: 1, name: data.meta_title }]),
+    )
     dispatch(
       setCartItems([...items, { ...data, amount: 1, name: data.meta_title }]),
     )

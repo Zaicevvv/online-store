@@ -23,6 +23,7 @@ const Cart = () => {
       } else return item
     })
     dispatch(setCartItems(newItems))
+    localStorage.setItem('items', JSON.stringify(newItems))
   }
 
   const handleDecrement = (id, e) => {
@@ -35,23 +36,24 @@ const Cart = () => {
       } else return item
     })
     dispatch(setCartItems(newItems))
+    localStorage.setItem('items', JSON.stringify(newItems))
   }
 
   const handleCheckout = () =>
-    setTimeout(
-      () =>
-        stage === 1
-          ? setStage(2)
-          : isToSent &&
-            checkoutSuccess() &&
-            // console.log(items, {
-            //   ...formData,
-            //   city: formData.city.label,
-            //   spot: formData.spot.label,
-            // }) &&
-            handleClose(),
-      300,
-    )
+    setTimeout(() => {
+      if (stage === 1) return setStage(2)
+      if (isToSent) {
+        checkoutSuccess()
+        // console.log(items, {
+        //   ...formData,
+        //   city: formData.city.label,
+        //   spot: formData.spot.label,
+        // }) &&
+        dispatch(setCartItems([]))
+        localStorage.setItem('items', JSON.stringify([]))
+        handleClose()
+      }
+    }, 300)
 
   const handleClose = () => dispatch(setIsCartOpen(false))
 
@@ -68,6 +70,7 @@ const Cart = () => {
     let newItems = [...items]
     newItems = newItems.filter((item) => +item.product_id !== +id)
     dispatch(setCartItems(newItems))
+    localStorage.setItem('items', JSON.stringify(newItems))
   }
 
   return (

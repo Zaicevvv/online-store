@@ -3,9 +3,9 @@ import { error } from '../helpers/notyf'
 
 const URL = process.env.REACT_APP_BASE_URL
 
-const GET_PRODUCTS = () =>
+const GET_PRODUCTS = (page = 1) =>
   axios
-    .get(`${URL}/index.php?route=product/category&path=59`)
+    .get(`${URL}/index.php?route=product/category&path=59&page=${page}`)
     .then((response) => response.data.products)
     .catch((er) => {
       error(er)

@@ -91,17 +91,14 @@ const BasicHeader = () => {
               <img className={css.call} alt="call" src={call} />
             </a>
           )}
-          <img
-            className={css.cartImg}
-            alt="cart"
-            src={miniCart}
-            onClick={toggleCart}
-          />
-          {!!items.length && (
-            <div className={css.amountWrapper}>
-              <span className={css.amount}>{items.length}</span>
-            </div>
-          )}
+          <div onClick={toggleCart}>
+            <img className={css.cartImg} alt="cart" src={miniCart} />
+            {!!items.length && (
+              <div className={css.amountWrapper}>
+                <span className={css.amount}>{items.length}</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <div className={css.mobHeader}>
@@ -119,7 +116,6 @@ const BasicHeader = () => {
             </div>
           )}
         </div>
-        {/* <div className={css.menuWrapper}> */}
         <button onClick={toggleMenu} className={css.menuButton}>
           <svg
             stroke="var(--white)"
@@ -137,7 +133,6 @@ const BasicHeader = () => {
             ></path>
           </svg>
         </button>
-        {/* </div> */}
       </div>
       <CSSTransition
         in={open}
