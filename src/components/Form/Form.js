@@ -15,7 +15,6 @@ import {
   setIsToSent,
   setIsLoading,
 } from '../../features/cart/cart'
-import { useNavigate } from 'react-router-dom'
 import ok from '../../assets/ok.svg'
 import api from '../../config/api'
 import css from './Form.module.css'
@@ -36,7 +35,6 @@ const Form = () => {
   const [radioError, setRadioError] = useState(false)
   const [spots, setSpots] = useState([])
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   useEffect(() => {
     if (formData.tel && formData.firstName && formData.lastName)
@@ -51,6 +49,7 @@ const Form = () => {
         dispatch(setIsToSent(true))
       }
     }
+    if (formData.city) onCityChange(formData.city)
   }, [])
 
   const onChange = (e) => {
@@ -179,8 +178,10 @@ const Form = () => {
     )
   }
 
+  const handleSubmit = (e) => e.preventDefault()
+
   return (
-    <form className={css.form}>
+    <form className={css.form} onSubmit={handleSubmit}>
       <div className={css.formHeader}>
         <div className={css.formHeaderContainer}>
           {!contactDetails ? (
@@ -197,6 +198,13 @@ const Form = () => {
           </Button>
         )}
       </div>
+      {contactDetails && (
+        <div className={css.preview}>
+          <p className={css.small}>Телефон: {formData.tel}</p>
+          <p className={css.small}>Прізвище: {formData.lastName}</p>
+          <p className={css.small}>Ім'я: {formData.firstName}</p>
+        </div>
+      )}
       <div
         className={`${css.container} ${contactDetails ? css.dn : css.red} ${
           formData.tel && formData.firstName && formData.lastName
@@ -252,22 +260,38 @@ const Form = () => {
         </Button>
       </div>
       {contactDetails && (
-        <div className={css.formHeader}>
-          <div className={css.formHeaderContainer}>
-            {!deliveryDetails ? (
-              <div className={css.number}>2</div>
-            ) : (
-              <img className={css.complete} alt="complete" src={ok} />
+        <>
+          <div className={css.formHeader}>
+            <div className={css.formHeaderContainer}>
+              {!deliveryDetails ? (
+                <div className={css.number}>2</div>
+              ) : (
+                <img className={css.complete} alt="complete" src={ok} />
+              )}
+              <h2 className={css.mainTitle}>Доставка</h2>
+              <span className={css.required}>*</span>
+            </div>
+            {deliveryDetails && (
+              <Button styled="change" onClick={handleDeliveryDetails}>
+                Змінити
+              </Button>
             )}
-            <h2 className={css.mainTitle}>Доставка</h2>
-            <span className={css.required}>*</span>
           </div>
-          {deliveryDetails && (
-            <Button styled="change" onClick={handleDeliveryDetails}>
-              Змінити
-            </Button>
+          {deliveryDetails && radio === 'post' && (
+            <div className={css.preview}>
+              <p className={css.small}>Місто: {formData.city.label}</p>
+              <p className={css.small}>Відділення: {formData.spot.label}</p>
+            </div>
           )}
-        </div>
+          {deliveryDetails && radio === 'self' && (
+            <div className={css.preview}>
+              <p className={css.small}>Заберу сам(а)</p>
+              <p className={css.small}>
+                За адресою: Місто Київ, Оболонський район, біля метро Мінська
+              </p>
+            </div>
+          )}
+        </>
       )}
       <div
         className={`${css.container} ${
@@ -362,6 +386,14 @@ const Form = () => {
               Самовивіз
             </label>
           </div>
+          {radio === 'self' && (
+            <div className={css.previewFirst}>
+              <p className={css.small}>Заберу сам(а)</p>
+              <p className={css.small}>
+                За адресою: Місто Київ, Оболонський район, біля метро Мінська
+              </p>
+            </div>
+          )}
         </div>
         <Button
           styled={

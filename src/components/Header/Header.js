@@ -9,7 +9,7 @@ import call from '../../assets/call.svg'
 import HeaderTransition from './HeaderTransition.module.css'
 import css from './Header.module.css'
 
-const BasicHeader = () => {
+const Header = () => {
   const { items, isCartOpen } = useSelector((state) => state.cart)
   const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
@@ -32,6 +32,8 @@ const BasicHeader = () => {
     isCartOpen && toggleCart()
   }
 
+  const handlePageChange = () => isCartOpen && dispatch(setIsCartOpen(false))
+
   return (
     <header className={css.header}>
       <div className={css.content}>
@@ -42,7 +44,7 @@ const BasicHeader = () => {
             className={css.logo}
             onClick={handleGoHome}
           />
-          <ul className={css.linksList}>
+          <ul className={css.linksList} onClick={handlePageChange}>
             <li className={css.links}>
               <NavLink
                 to="/"
@@ -180,4 +182,4 @@ const BasicHeader = () => {
   )
 }
 
-export default BasicHeader
+export default Header

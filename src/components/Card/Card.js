@@ -98,7 +98,7 @@ const Card = ({ product, i }) => {
               className={`${css.img} ${css.bigImg}`}
               style={{ backgroundImage: `url(${product.thumb})` }}
             ></div>
-            <div>
+            <div className={css.descriptionWrapper}>
               <p className={css.bigName}>{product.name}</p>
               <p className={css.description}>{product.meta_description}</p>
             </div>

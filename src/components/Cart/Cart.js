@@ -73,8 +73,10 @@ const Cart = () => {
     localStorage.setItem('items', JSON.stringify(newItems))
   }
 
+  const handleOverlay = (e) => e.target === e.currentTarget && handleClose()
+
   return (
-    <div className={css.overlay}>
+    <div className={css.overlay} onClick={handleOverlay}>
       <div className={css.wrapper}>
         <div className={css.header}>
           <h1 className={css.mainTitle}>

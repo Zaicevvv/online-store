@@ -128,20 +128,22 @@
     font-size: 13px;
 }
 
+.previewFirst {
+    padding-top: 10px;
+}
+
+.preview {
+    padding-left: 28px;
+    margin-bottom: 10px;
+}
+
+.preview p, .previewFirst p {
+    margin-bottom: 2px;
+}
+
 @media screen and (min-width: 768px) {
     .form {
         padding: 0 20px;
-    }
-}
-
-@media screen and (min-width: 768px) and (max-width: 888px) {
-    .form {
         max-height: 58vh;
-    }
-}
-
-@media screen and (min-width: 1024px) {
-    .form {
-        max-height: 48vh;
     }
 }

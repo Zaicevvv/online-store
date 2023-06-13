@@ -88,6 +88,12 @@
     font-weight: 600;
     margin: 0 10px;
     color: white;
+    overflow-wrap: anywhere;
+    word-wrap: anywhere;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
 }
 
 .price {
@@ -97,8 +103,12 @@
 
 .description {
     color: white;
-    overflow: hidden; 
-    max-height: 160px;
+    overflow-wrap: anywhere;
+    word-wrap: anywhere;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
 }
 
 .bigName {
@@ -106,6 +116,12 @@
     font-size: 20px;
     color: white;
     margin-bottom: 10px;
+    overflow-wrap: anywhere;
+    word-wrap: anywhere;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
 }
 
 .bigPrice {

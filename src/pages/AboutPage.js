@@ -7,47 +7,50 @@ const AboutPage = () => (
       <section className={css.aboutInfoSection}>
         <h1 className={css.aboutTitle}>Про нас</h1>
         <article className={css.aboutContainer}>
-          <p className={css.aboutText}>
-            Компанія Віталайн має власне виробництво.
-          </p>
-          <p className={css.aboutText}>
-            Компанія Віталайн самостійно вирішує питання асортименту.
-          </p>
-          <p className={css.aboutText}>
-            Компанія Віталайн більше 25 років успішно працює в Україні та
-            країнах СНД.
-          </p>
-          <p className={css.aboutText}>
-            Компанія Віталайн фінансово стабільна.
-          </p>
-          <p className={css.aboutText}>
-            Компанія Віталайн створила науково-консультаційний відділ.
-          </p>
-          <p className={css.aboutText}>
-            Маркетинг-план Компанії Віталайн на сьогоднішній день один з
-            найбільш лояльних і добре продуманих.
-          </p>
-          <p className={css.aboutText}>
-            Основне досягнення компанії за роки роботи - це довіра людей до
-            якості продукції і до самої компанії.
-          </p>
+          <h2 className={css.aboutSubTitle}>Компанія Віталайн / Vitaline</h2>
+          <ul className={css.aboutInfoList}>
+            <li className={css.aboutText}>Має власне виробництво.</li>
+            <li className={css.aboutText}>
+              Самостійно вирішує питання асортименту.
+            </li>
+            <li className={css.aboutText}>
+              Більше 25 років успішно працює в Україні та країнах СНД.
+            </li>
+            <li className={css.aboutText}>Фінансово стабільна.</li>
+            <li className={css.aboutText}>
+              Створила науково-консультаційний відділ.
+            </li>
+            <li className={css.aboutText}>
+              Маркетинг-план Компанії Віталайн на сьогоднішній день один з
+              найбільш лояльних і добре продуманих.
+            </li>
+            <li className={css.aboutText}>
+              Основне досягнення компанії за роки роботи - це довіра людей до
+              якості продукції і до самої компанії.
+            </li>
+          </ul>
         </article>
         <article className={css.aboutContainer}>
           <h2 className={css.aboutSubTitle}>Інформація про компанію</h2>
-          <p className={css.aboutText}>Назва: Віталайн з США</p>
-          <p className={css.aboutText}>
-            Тип компанії: Дистриб'ютор / Реселер, Компанія, що надає послуги
-          </p>
+          <div className={css.aboutTextWrapper}>
+            <p className={css.aboutText}>Назва:</p>
+            <p className={css.aboutText}>Віталайн з США</p>
+            <p className={css.aboutText}>Тип компанії:</p>
+            <p className={css.aboutText}>
+              Дистриб'ютор / Реселер, Компанія, що надає послуги
+            </p>
+          </div>
         </article>
         <article className={css.aboutContainer}>
           <h2 className={css.aboutSubTitle}>Інформація про виробництво</h2>
-          <p className={css.aboutText}>
-            Розміри виробничих площ: Понад 100000 кв.м.
-          </p>
-          <p className={css.aboutText}>Місцезнаходження виробництва: США</p>
-          <p className={css.aboutText}>
-            Контроль якості: Зовнішній та внутрішній
-          </p>
+          <div className={css.aboutTextWrapper}>
+            <p className={css.aboutText}>Розміри виробничих площ:</p>
+            <p className={css.aboutText}>Понад 100000 кв.м.</p>
+            <p className={css.aboutText}>Місцезнаходження виробництва:</p>
+            <p className={css.aboutText}>США</p>
+            <p className={css.aboutText}>Контроль якості:</p>
+            <p className={css.aboutText}>Зовнішній та внутрішній</p>
+          </div>
         </article>
       </section>
       <section className={css.aboutContactSection}>

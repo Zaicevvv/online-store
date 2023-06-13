@@ -18,7 +18,7 @@ const options = [
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([])
-  const [page, setPage] = useState('')
+  const [page, setPage] = useState(1)
   const [category, setCategory] = useState('')
 
   const dispatch = useDispatch()

@@ -9,7 +9,8 @@
 
 html {
   scroll-behavior: smooth;
-  }
+  overflow: auto;
+}
 
 body {
   min-height: 100vh;
@@ -20,6 +21,7 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  overflow: auto;
 }
 
 body #root {
