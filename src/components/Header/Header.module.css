@@ -182,6 +182,10 @@
     cursor: pointer;
 }
 
+.mobHeaderContainer {
+    display: flex;
+}
+
 @media screen and (max-width: 900px) {
     .mobHeader {
         display: flex;

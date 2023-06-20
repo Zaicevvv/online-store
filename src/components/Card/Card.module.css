@@ -26,6 +26,11 @@
     transition: all 0.3s;
 }
 
+.right .info {
+    right: 10px;
+    left: unset;
+}
+
 .info:hover {
     transform: scale(1.2);
 }
@@ -57,14 +62,24 @@
 
 .container {
     display: flex;
+    flex-direction: row-reverse;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
+.right .container {
+    flex-direction: row;
+}
+
 .jcsb_aic {
     display: flex;
+    flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
+}
+
+.right .jcsb_aic {
+    flex-direction: row;
 }
 
 .aic {
@@ -128,5 +143,16 @@
     font-weight: 600;
     font-size: 24px;
     color: white;
+    margin-right: 16px;
+}
+
+.right .jcsb_aic .bigPrice {
     margin-left: 16px;
+}
+
+@media screen and (min-width: 460px) {
+    .bigImg {
+        width: calc(var(--index) * 12);
+        max-height: 200px;
+    }
 }

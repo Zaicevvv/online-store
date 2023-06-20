@@ -53,6 +53,13 @@ const Form = () => {
   }, [])
 
   const onChange = (e) => {
+    if (
+      (e.target.name === 'lastName' || e.target.name === 'firstName') &&
+      e.target.value &&
+      !isNaN(e.target.value.slice(-1))
+    )
+      return
+
     e.target.name === 'tel' && dispatch(setTelError(false))
     e.target.name === 'lastName' && dispatch(setLastNameError(false))
     e.target.name === 'firstName' && dispatch(setFirstNameError(false))
@@ -189,8 +196,9 @@ const Form = () => {
           ) : (
             <img className={css.complete} src={ok} alt="complete" />
           )}
-          <h2 className={css.mainTitle}>Контактні дані</h2>
-          <span className={css.required}>*</span>
+          <h2 className={css.mainTitle}>
+            Контактні дані<span className={css.required}>*</span>
+          </h2>
         </div>
         {contactDetails && (
           <Button styled="change" onClick={handleContactDetails}>
@@ -212,8 +220,9 @@ const Form = () => {
             : ''
         }`}
       >
-        <p className={css.formTitle}>Телефон</p>
-        <span className={css.required}>*</span>
+        <p className={css.formTitle}>
+          Телефон<span className={css.required}>*</span>
+        </p>
         {telError && (
           <p className={css.error}>
             Будь ласка введіть правильний номер телефону
@@ -226,8 +235,9 @@ const Form = () => {
           value={formData.tel || ''}
           onChange={onChange}
         />
-        <p className={css.formTitle}>Прізвище</p>
-        <span className={css.required}>*</span>
+        <p className={css.formTitle}>
+          Прізвище<span className={css.required}>*</span>
+        </p>
         {lastNameError && (
           <p className={css.error}>Будь ласка введіть Прізвище</p>
         )}
@@ -238,8 +248,9 @@ const Form = () => {
           value={formData.lastName || ''}
           onChange={onChange}
         />
-        <p className={css.formTitle}>Ім'я</p>
-        <span className={css.required}>*</span>
+        <p className={css.formTitle}>
+          Ім'я<span className={css.required}>*</span>
+        </p>
         {firstNameError && <p className={css.error}>Будь ласка введіть Ім'я</p>}
         <Input
           name="firstName"
@@ -268,8 +279,9 @@ const Form = () => {
               ) : (
                 <img className={css.complete} alt="complete" src={ok} />
               )}
-              <h2 className={css.mainTitle}>Доставка</h2>
-              <span className={css.required}>*</span>
+              <h2 className={css.mainTitle}>
+                Доставка<span className={css.required}>*</span>
+              </h2>
             </div>
             {deliveryDetails && (
               <Button styled="change" onClick={handleDeliveryDetails}>
@@ -324,8 +336,9 @@ const Form = () => {
           </div>
           {radio === 'post' && (
             <div className={css.post}>
-              <p className={`${css.formTitle} ${css.small}`}>Населений пункт</p>
-              <span className={css.required}>*</span>
+              <p className={`${css.formTitle} ${css.small}`}>
+                Населений пункт<span className={css.required}>*</span>
+              </p>
               {formData.city && (
                 <Button styled="change" onClick={handleCityChange}>
                   Змінити
@@ -348,22 +361,31 @@ const Form = () => {
               )}
               {formData.city && (
                 <>
-                  <p className={`${css.formTitle} ${css.small}`}>Відділення</p>
-                  <span className={css.required}>*</span>
-                  {formData.spot && (
-                    <Button styled="change" onClick={handleSpotChange}>
-                      Змінити
-                    </Button>
-                  )}
+                  <div className={css.np}>
+                    <p
+                      className={`${css.formTitle} ${css.small} ${css.spotTitle}`}
+                    >
+                      Відділення
+                      <br className={css.br} /> або поштомат
+                      <span className={css.required}>*</span>
+                    </p>
+                    {formData.spot && (
+                      <Button styled="change" onClick={handleSpotChange}>
+                        Змінити
+                      </Button>
+                    )}
+                  </div>
                   {spotError && (
-                    <p className={css.error}>Будь ласка оберіть відділення</p>
+                    <p className={css.error}>
+                      Будь ласка оберіть відділення або поштомат
+                    </p>
                   )}
                   {formData.spot ? (
                     <p className={css.selected}>{formData.spot.label}</p>
                   ) : (
                     <Select
                       name="spot"
-                      defaultValue="Оберіть відділення"
+                      defaultValue="Оберіть відділення або поштомат"
                       value={formData.spot || ''}
                       onChange={onSpotChange}
                       options={spots}

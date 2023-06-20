@@ -27,7 +27,7 @@
 .cardList {
     padding-top: 20px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
     gap: 20px;
 }
 
@@ -102,6 +102,21 @@
     text-decoration: none;
     cursor: pointer;
     font-weight: 600;
+}
+
+.navFooter {
+    padding-top: 20px;
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+
+.productsPage {
+    color: var(--white);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .aboutInfoSection, .aboutContactSection, .productDescription, .articlesWrapper {
@@ -311,6 +326,12 @@
 
 .article_text {
     overflow: hidden;
+}
+
+@media screen and (min-width: 460px) {
+    .cardList {    
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
 }
 
 @media screen and (min-width: 768px) {

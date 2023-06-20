@@ -10,36 +10,52 @@ import css from './Card.module.css'
 
 const Card = ({ product, i }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const items = useSelector((state) => state.cart.items)
+  const { items, isCartOpen } = useSelector((state) => state.cart)
   const dispatch = useDispatch()
 
   let w = window.innerWidth
 
   const isRight = () => {
-    if (w < 515) {
+    if (w < 680) {
       if (i % 2) return css.right
-    } else if (w < 680) {
-      if (i % 3 === 2) return css.right
-    } else if (w < 925) {
-      if (i % 4 === 3) return css.right
-    } else if (w < 1170) {
-      if (i % 5 === 4) return css.right
-    } else if (w < 1335) {
-      if (i % 6 === 5) return css.right
+    } else if (w < 980 || (w > 1023 && w < 1060)) {
+      if (i % 3) return css.right
+    } else if (w < 1280 || (w > 979 && w < 1024)) {
+      if (i % 4) return css.right
     } else if (w < 1500) {
-      if (i % 7 === 6) return css.right
-    } else if (w < 1665) {
-      if (i % 8 === 7) return css.right
-    } else if (w < 1830) {
-      if (i % 9 === 8) return css.right
+      if (i % 5) return css.right
+    } else if (w < 1720) {
+      if (i % 6) return css.right
+    } else if (w < 1940) {
+      if (i % 7) return css.right
+    } else if (w < 2160) {
+      if (i % 8) return css.right
+    } else if (w < 2380) {
+      if (i % 9) return css.right
+    } else if (w < 2600) {
+      if (i % 10) return css.right
+    } else if (w < 2820) {
+      if (i % 11) return css.right
+    } else if (w < 3040) {
+      if (i % 12) return css.right
     } else {
-      if (i % 10 === 9) return css.right
+      if (i % 13) return css.right
     }
   }
 
   const handleHover = (e) => {
     if (e.target.tagName === 'BUTTON' || e.target.tagName === 'SPAN') return
     setIsModalOpen(!isModalOpen)
+  }
+
+  const handleHoverOn = (e) => {
+    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'SPAN') return
+    setIsModalOpen(true)
+  }
+
+  const handleHoverOff = (e) => {
+    if (e.target.tagName === 'BUTTON' || e.target.tagName === 'SPAN') return
+    setIsModalOpen(false)
   }
 
   const handleAddToCart = () => {
@@ -63,8 +79,8 @@ const Card = ({ product, i }) => {
           ? css.green
           : ''
       }`}
-      onMouseEnter={handleHover}
-      onMouseLeave={handleHover}
+      onMouseEnter={handleHoverOn}
+      onMouseLeave={handleHoverOff}
       onClick={handleHover}
     >
       {items.find((item) => +item.product_id === +product.product_id) && (
@@ -82,6 +98,7 @@ const Card = ({ product, i }) => {
       </div>
       <CSSTransition
         in={
+          !isCartOpen &&
           isModalOpen &&
           !items.find((item) => +item.product_id === +product.product_id)
         }
@@ -94,14 +111,14 @@ const Card = ({ product, i }) => {
             <a className={css.info} href={`product/${product.product_id}`}>
               <img alt="Information" src={information} />
             </a>
-            <div
-              className={`${css.img} ${css.bigImg}`}
-              style={{ backgroundImage: `url(${product.thumb})` }}
-            ></div>
             <div className={css.descriptionWrapper}>
               <p className={css.bigName}>{product.name}</p>
               <p className={css.description}>{product.meta_description}</p>
             </div>
+            <div
+              className={`${css.img} ${css.bigImg}`}
+              style={{ backgroundImage: `url(${product.thumb})` }}
+            ></div>
           </div>
           <div className={css.jcsb_aic}>
             <p className={css.bigPrice}>{product.price}</p>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Button from '../reusable/Button/Button'
 import Form from '../Form/Form'
@@ -14,6 +14,7 @@ const Cart = () => {
   const [stage, setStage] = useState(1)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
 
   const handleIncrement = (id, e) => {
     let newItems = [...items]
@@ -61,8 +62,12 @@ const Cart = () => {
 
   const handleGoToProducts = () => {
     setTimeout(() => {
-      navigate('products')
-      handleClose()
+      if (location.pathname.slice(1, 9) === 'product/') {
+        handleClose()
+      } else {
+        navigate('products')
+        handleClose()
+      }
     }, 300)
   }
 
@@ -103,23 +108,25 @@ const Cart = () => {
                     />
                     <div className={css.product}>
                       <img className={css.img} alt="product" src={item.thumb} />
-                      <h2>{item.name}</h2>
-                      <h2>{item.price}</h2>
+                      <h2 className={css.productName}>{item.name}</h2>
                     </div>
-                    <div className={css.btnsContainer}>
-                      <Button
-                        styled="amount"
-                        onClick={handleDecrement.bind(this, item.product_id)}
-                      >
-                        -
-                      </Button>
-                      <span className={css.amount}>{item.amount}</span>
-                      <Button
-                        styled="amount"
-                        onClick={handleIncrement.bind(this, item.product_id)}
-                      >
-                        +
-                      </Button>
+                    <div className={css.productFooter}>
+                      <h2 className={css.productPrice}>{item.price}</h2>
+                      <div className={css.btnsContainer}>
+                        <Button
+                          styled="amount"
+                          onClick={handleDecrement.bind(this, item.product_id)}
+                        >
+                          -
+                        </Button>
+                        <span className={css.amount}>{item.amount}</span>
+                        <Button
+                          styled="amount"
+                          onClick={handleIncrement.bind(this, item.product_id)}
+                        >
+                          +
+                        </Button>
+                      </div>
                     </div>
                   </li>
                 ))}
@@ -127,7 +134,7 @@ const Cart = () => {
             ) : (
               <>
                 <img className={css.cartImg} alt="cart" src={cart} />
-                <h2 className={css.empty}>В кошику немає товарів</h2>
+                <h2 className={css.empty}>У кошику немає товарів</h2>
               </>
             )}
           </>
@@ -158,7 +165,11 @@ const Cart = () => {
               rippled
               onClick={stage === 1 ? handleGoToProducts : handleBack}
             >
-              {stage === 1 ? 'До товарів' : 'До кошика'}
+              {stage === 1
+                ? location.pathname.slice(1, 9) === 'product/'
+                  ? 'Закрити кошик'
+                  : 'До товарів'
+                : 'До кошика'}
             </Button>
           </div>
         ) : (
@@ -168,7 +179,9 @@ const Cart = () => {
             rippled
             onClick={handleGoToProducts}
           >
-            До товарів
+            {location.pathname.slice(1, 9) === 'product/'
+              ? 'Закрити кошик'
+              : 'До товарів'}
           </Button>
         )}
       </div>

@@ -17,13 +17,13 @@ const notyf = new Notyf({
 })
 
 export const addToCartSuccess = (name) => {
-  notyf.success(`Ви успішно добавили ${name} до кошика!`)
+  notyf.success(`Ви додали ${name} до кошика!`)
 
   return true
 }
 
 export const checkoutSuccess = () => {
-  notyf.success('Дякуємо, Ваше замовлення прийняте! Ми Вам зателефонуємо.')
+  notyf.success("Дякуємо, Ваше замовлення прийняте! Ми з Вами зв'яжемося.")
 
   return true
 }

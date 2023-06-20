@@ -17,6 +17,7 @@ import CardTransition from '../src/components/Card/CardTransition.module.css'
 
 const App = () => {
   const { isCartOpen, isLoading } = useSelector((state) => state.cart)
+
   const location = useLocation()
   const dispatch = useDispatch()
 

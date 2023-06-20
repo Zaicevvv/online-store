@@ -10,11 +10,11 @@ import css from './pages.module.css'
 const ProductPage = () => {
   const [data, setData] = useState({})
   const items = useSelector((state) => state.cart.items)
-  const params = useParams()
-  const myRef = useRef(null)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const params = useParams()
+  const myRef = useRef(null)
 
   useEffect(() => {
     api.GET_PRODUCT(params.id).then((res) => {

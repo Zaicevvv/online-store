@@ -9,11 +9,10 @@
 
 html {
   scroll-behavior: smooth;
-  overflow: auto;
 }
 
 body {
-  min-height: 100vh;
+  height: 100vh;
   font-family: 'Sofia Sans', sans-serif;
   font-weight: 400; /*300, 300 italic, 400, 600*/
   background: url(../assets/nature.jpg);
@@ -21,11 +20,6 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  overflow: auto;
-}
-
-body #root {
-  min-height: 100vh;
 }
 
 :root {

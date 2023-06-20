@@ -110,13 +110,22 @@ const Header = () => {
           className={css.mobLogo}
           onClick={handleGoHome}
         />
-        <div className={css.cart} onClick={toggleCart}>
-          <img className={css.cartImg} alt="cart" src={miniCart} />
-          {!!items.length && (
-            <div className={css.amountWrapper}>
-              <span className={css.amount}>{items.length}</span>
-            </div>
-          )}
+        <div className={css.mobHeaderContainer}>
+          <a
+            className={css.link}
+            style={{ opacity: 1 }}
+            href="tel:+380689811557"
+          >
+            <img className={css.call} alt="call" src={call} />
+          </a>
+          <div className={css.cart} onClick={toggleCart}>
+            <img className={css.cartImg} alt="cart" src={miniCart} />
+            {!!items.length && (
+              <div className={css.amountWrapper}>
+                <span className={css.amount}>{items.length}</span>
+              </div>
+            )}
+          </div>
         </div>
         <button onClick={toggleMenu} className={css.menuButton}>
           <svg
