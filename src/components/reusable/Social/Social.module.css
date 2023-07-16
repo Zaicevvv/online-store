@@ -1,4 +1,5 @@
 .wrapper {
+    height: 54px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,23 +7,30 @@
     padding-top: 10px;
 }
 
-.footer li a {
-    color: var(--white);
-}
-
-.link {
+.wrapper li {
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     text-decoration: none;
     color: var(--black);
     font-size: 12px;
 }
 
+.footer li a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+.link {
+    text-decoration: none;
+    color: var(--black);
+}
+
 .icon {
     width: 30px;
     transition: 200ms linear all;
-    margin-bottom: 2px;
 }
 
 .icon:hover {
