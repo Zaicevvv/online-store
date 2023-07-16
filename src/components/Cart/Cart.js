@@ -62,7 +62,7 @@ const Cart = () => {
 
   const handleGoToProducts = () => {
     setTimeout(() => {
-      if (location.pathname.slice(1, 9) === 'product/') {
+      if (location.pathname.split('/')[1] === 'product') {
         handleClose()
       } else {
         navigate('products')
@@ -166,7 +166,7 @@ const Cart = () => {
               onClick={stage === 1 ? handleGoToProducts : handleBack}
             >
               {stage === 1
-                ? location.pathname.slice(1, 9) === 'product/'
+                ? location.pathname.split('/')[1] === 'product'
                   ? 'Закрити кошик'
                   : 'До товарів'
                 : 'До кошика'}
@@ -179,7 +179,7 @@ const Cart = () => {
             rippled
             onClick={handleGoToProducts}
           >
-            {location.pathname.slice(1, 9) === 'product/'
+            {location.pathname.split('/')[1] === 'product'
               ? 'Закрити кошик'
               : 'До товарів'}
           </Button>

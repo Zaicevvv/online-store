@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setIsCartOpen } from '../../features/cart/cart'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
-import logo from '../../assets/logo.jpg'
+import logo from '../../assets/logo.png'
 import miniCart from '../../assets/miniCart.svg'
 import call from '../../assets/call.svg'
 import HeaderTransition from './HeaderTransition.module.css'
@@ -28,7 +28,7 @@ const Header = () => {
   }
 
   const handleGoHome = () => {
-    navigate('/')
+    navigate('/products')
     isCartOpen && toggleCart()
   }
 
@@ -50,7 +50,7 @@ const Header = () => {
                 to="/"
                 className={({ isActive }) => (isActive ? css.active : css.link)}
               >
-                Головна
+                Превью
               </NavLink>
             </li>
             <li className={css.links}>
@@ -164,7 +164,7 @@ const Header = () => {
               to="/"
               className={({ isActive }) => (isActive ? css.active : css.link)}
             >
-              Головна
+              Превью
             </NavLink>
             <NavLink
               to="/products"

@@ -55,6 +55,7 @@
     font-size: 30px;
     color: white;
     text-align: center;
+    text-wrap: balance;
 }
 
 .productPrice {
@@ -63,8 +64,12 @@
     color: white;
 }
 
-.productDescription > h1 {
+.productDescription > h1, .productProductsDescriptionTitle {
     font-size: 24px;
+}
+
+.productProductsDescriptionTitle, .productProductsFooter {
+    padding: 0 20px;
 }
 
 .productDescription > * {
@@ -107,7 +112,7 @@
 .navFooter {
     padding-top: 20px;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 10px;
 }
 
@@ -119,11 +124,51 @@
     gap: 10px;
 }
 
-.aboutInfoSection, .aboutContactSection, .productDescription, .articlesWrapper {
+.productDescriptionWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.productProducts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: 20px;
+    margin: 0;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.productProductsItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productProductsImg {
+    min-width: 144px;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+}
+
+.productProductsName {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.aboutInfoSection, .aboutContactSection, .productDescription, .productProductsDescription, .articlesWrapper {
     padding: 20px;
     background: rgba(255,255,255,0.8);
     box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.06);
     border-radius: 12px;
+}
+
+.productProductsDescription {
+    padding: 20px 0;
 }
 
 .aboutInfoSection {
@@ -332,6 +377,10 @@
     .cardList {    
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
+
+    .productProducts {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -349,7 +398,7 @@
 
     .productMedia {
         display: flex;
-        align-items: start;
+        align-items: flex-start;
         gap: 20px;
     }
 
@@ -397,5 +446,9 @@
 
     .aboutInfoSection {
         margin-bottom: 0;
+    }
+
+    .aboutContactSection {
+        height: 100%;
     }
 }

@@ -28,7 +28,7 @@ const App = () => {
       dispatch(setFormData(JSON.parse(localStorage.getItem('formData'))))
     if (localStorage.getItem('radio'))
       dispatch(setRadio(JSON.parse(localStorage.getItem('radio'))))
-  }, [])
+  }, [dispatch])
 
   return (
     <>
@@ -40,7 +40,7 @@ const App = () => {
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/articles" element={<ArticlesPage />} />
 
-        <Route path="*" element={<Navigate replace to="/" />} />
+        <Route path="*" element={<Navigate replace to="/products" />} />
       </Routes>
       <CSSTransition
         in={isCartOpen}

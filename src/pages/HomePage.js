@@ -10,6 +10,7 @@ const HomePage = () => {
 
   useEffect(() => {
     rain()
+    document.title = 'Vitaline'
   }, [])
 
   const handleGoToProducts = () =>

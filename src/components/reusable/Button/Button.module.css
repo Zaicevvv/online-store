@@ -125,6 +125,11 @@
     border-color: var(--black3);
 }
 
+.green {
+    background: linear-gradient(135deg, rgba(83, 255, 60, 0.4), rgba(83, 255, 60, 0.1));
+    /* border: 1px solid rgba(83, 255, 60, 0.18); */
+}
+
 @media screen and (min-width: 481px) {
     .footer {
         bottom: 120px;

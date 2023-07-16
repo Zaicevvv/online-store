@@ -112,13 +112,17 @@ const Card = ({ product, i }) => {
               <img alt="Information" src={information} />
             </a>
             <div className={css.descriptionWrapper}>
-              <p className={css.bigName}>{product.name}</p>
-              <p className={css.description}>{product.meta_description}</p>
+              <a className={css.infoN} href={`product/${product.product_id}`}>
+                <p className={css.bigName}>{product.name}</p>
+                <p className={css.description}>{product.meta_description}</p>
+              </a>
             </div>
-            <div
-              className={`${css.img} ${css.bigImg}`}
-              style={{ backgroundImage: `url(${product.thumb})` }}
-            ></div>
+            <a href={`product/${product.product_id}`}>
+              <div
+                className={`${css.img} ${css.bigImg}`}
+                style={{ backgroundImage: `url(${product.thumb})` }}
+              ></div>
+            </a>
           </div>
           <div className={css.jcsb_aic}>
             <p className={css.bigPrice}>{product.price}</p>

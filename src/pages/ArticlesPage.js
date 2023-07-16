@@ -53,6 +53,7 @@ const ArticlesPage = () => {
 
   useEffect(() => {
     setArticles(demo)
+    document.title = 'Vitaline'
   }, [])
 
   const handleToggle = (id, e) => {

@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { setIsCartOpen, setCartItems } from '../features/cart/cart'
+import {
+  setIsCartOpen,
+  setCartItems,
+  setIsLoading,
+} from '../features/cart/cart'
 import Button from '../components/reusable/Button/Button'
 import api from '../config/api'
 import { addToCartSuccess } from '../helpers/notyf'
@@ -15,13 +19,23 @@ const ProductPage = () => {
   const navigate = useNavigate()
   const params = useParams()
   const myRef = useRef(null)
+  const pageTopRef = useRef(null)
 
   useEffect(() => {
-    api.GET_PRODUCT(params.id).then((res) => {
-      setData({ ...res, price: res.price.slice(0, -3) })
-      myRef.current.innerHTML = `<h1>Опис</h1>  <p>${res.meta_description}</p>  ${res.description}`
-    })
-  }, [params.id])
+    dispatch(setIsLoading(true))
+    api
+      .GET_PRODUCT(params.id)
+      .then((res) => {
+        !res && navigate('/products')
+        setData({ ...res, price: res.price.slice(0, -3) })
+        myRef.current.innerHTML = `<h1>Опис</h1>  <p>${res.meta_description}</p>  ${res.description}`
+        document.title = res.meta_title
+      })
+      .finally(() => {
+        dispatch(setIsLoading(false))
+        pageTopRef.current.scrollIntoView()
+      })
+  }, [params.id, navigate])
 
   const handleAddToCart = () => {
     if (items.find((item) => +item.product_id === +data.product_id)) {
@@ -47,8 +61,13 @@ const ProductPage = () => {
       navigate('/products')
     }, 300)
 
+  const handleGoToProduct = (id, e) =>
+    setTimeout(() => {
+      navigate(`/product/${id}`)
+    }, 300)
+
   return (
-    <main className={css.main}>
+    <main className={css.main} ref={pageTopRef}>
       <div className={css.productMedia}>
         <div className={css.productWrapper}>
           <img className={css.productImg} alt="product" src={data.thumb} />
@@ -67,7 +86,37 @@ const ProductPage = () => {
             <p className={css.productLink}>Марія</p>
           </div>
         </div>
-        <div className={css.productDescription} ref={myRef}></div>
+        <div className={css.productDescriptionWrapper}>
+          <div className={css.productDescription} ref={myRef}></div>
+          {Object.keys(data).length > 0 && data.products.length > 0 && (
+            <div className={css.productProductsDescription}>
+              <h2 className={css.productProductsDescriptionTitle}>
+                З цим товаром також замовляють
+              </h2>
+              <ul className={css.productProducts}>
+                {data.products.map((item) => (
+                  <li key={item.product_id} className={css.productProductsItem}>
+                    <div
+                      className={css.productProductsImg}
+                      style={{ backgroundImage: `url(${item.thumb})` }}
+                    ></div>
+                    <div className={css.productProductsFooter}>
+                      <h2 className={css.productProductsName}>{item.name}</h2>
+                      <Button
+                        styled="invert"
+                        style={{ display: 'block', margin: '0 auto' }}
+                        onClick={handleGoToProduct.bind(this, item.product_id)}
+                        rippled
+                      >
+                        До товару
+                      </Button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
     </main>
   )
