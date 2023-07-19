@@ -314,6 +314,10 @@
     padding-bottom: 20px;
     border-bottom: 1px solid var(--black3);
 }
+
+.article_trigger {
+    cursor: pointer;
+}
   
 .article_trigger::before,
 .article_trigger::after {

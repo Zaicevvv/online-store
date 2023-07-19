@@ -82,6 +82,7 @@ const ArticlesPage = () => {
                         ? css.article_trigger__active
                         : ''
                     }`}
+                    onClick={handleToggle.bind(this, el.id)}
                   ></div>
                   <div className={css.article_header}>
                     <img

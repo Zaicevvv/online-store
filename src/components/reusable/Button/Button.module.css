@@ -26,7 +26,7 @@
 }
 
 .button:hover {
-    background: #33BA21;
+    background: #2fb11e;
 }
 
 .button:hover::before {
@@ -131,7 +131,7 @@
 }
 
 .green {
-    background: #33BA21;
+    background: #2fb11e;
 }
 
 .amount:hover, .back:hover, .change:hover, .checkout:hover, .checkout2:hover, .main:hover, .invert:hover {
