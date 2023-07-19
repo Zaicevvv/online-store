@@ -8,24 +8,8 @@
 }
 
 .wrapper li {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
-    color: var(--black);
-    font-size: 12px;
-}
-
-.footer li a {
-    text-decoration: none;
-    color: var(--white);
-}
-
-.link {
-    text-decoration: none;
-    color: var(--black);
+    display: grid;
+    place-items: center;
 }
 
 .icon {

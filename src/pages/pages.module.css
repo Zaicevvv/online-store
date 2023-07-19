@@ -196,12 +196,27 @@
 
 .aboutTextWrapper {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    align-items: center;
+    grid-template-columns: 0.3fr 0.7fr;
 }
 
 .aboutText {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
+
+.aboutMB {
+    margin-bottom: 16px;
+}
+
+.aboutTextStyle {
+    color: var(--gray5);
+}
+
+.aboutSecondaryText {
+    color: black;
+    font-weight: 600;
+}
+
 
 /* parallax styles */
 
@@ -450,5 +465,10 @@
 
     .aboutContactSection {
         height: 100%;
+        min-width: 260px;
+    }
+
+    .aboutTextWrapper {
+        grid-template-columns: 0.2fr 0.8fr;
     }
 }

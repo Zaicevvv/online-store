@@ -3,7 +3,7 @@
     font-size: 18px;
     line-height: 22px;
     border: 2px solid white;
-    background: transparent;
+    background: #66B9EB;
     color: white;
     border-radius: 6px;
     padding: 10px 20px;
@@ -19,15 +19,14 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: white;
+    background: #66B9EB;
     z-index: -1;
     clip-path: circle(0% at 50% 50%);
     transition: 0.3s ease-in-out;
 }
 
 .button:hover {
-    color: black;
-    background: white;
+    background: #33BA21;
 }
 
 .button:hover::before {
@@ -45,6 +44,7 @@
 .checkout, .checkout2 {
     color: #AA6FA8;
     border-color: #AA6FA8;
+    background: transparent;
     margin: 0 auto;
     display: block;
     margin-bottom: 20px;
@@ -57,6 +57,7 @@
 .back {
     color: #7c7c7c;
     border-color: #7c7c7c;
+    background: transparent;
     margin: 0 auto;
     display: block;
 }
@@ -64,6 +65,7 @@
 .amount {
     color: #AA6FA8;
     border-color: #AA6FA8;
+    background: transparent;
     width: 30px;
     padding: 0;
     padding: 3px;
@@ -74,6 +76,7 @@
     padding: 0 5px;
     border: none;
     color: #AA6FA8;
+    background: transparent;
 }
 
 .disabled, .disabled:hover {
@@ -114,6 +117,7 @@
 }
 
 .main {
+    background: transparent;
     padding: var(--index) calc(var(--index) * 2);
     font-size: calc(var(--index) * 1.5);
     color: rgb(255 255 255 / 0.9);
@@ -123,11 +127,19 @@
 .invert {
     color: var(--black3);
     border-color: var(--black3);
+    background: transparent;
 }
 
 .green {
-    background: linear-gradient(135deg, rgba(83, 255, 60, 0.4), rgba(83, 255, 60, 0.1));
-    /* border: 1px solid rgba(83, 255, 60, 0.18); */
+    background: #33BA21;
+}
+
+.amount:hover, .back:hover, .change:hover, .checkout:hover, .checkout2:hover, .main:hover, .invert:hover {
+    background: white;
+}
+
+.main:hover {
+    color: var(--black3);
 }
 
 @media screen and (min-width: 481px) {

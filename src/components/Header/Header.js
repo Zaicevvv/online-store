@@ -3,9 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setIsCartOpen } from '../../features/cart/cart'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
+import Select from '../reusable/Select/Select'
+import { setIsLoading } from '../../features/cart/cart'
 import logo from '../../assets/logo.png'
 import miniCart from '../../assets/miniCart.svg'
 import call from '../../assets/call.svg'
+import api from '../../config/api'
 import HeaderTransition from './HeaderTransition.module.css'
 import css from './Header.module.css'
 
@@ -33,6 +36,31 @@ const Header = () => {
   }
 
   const handlePageChange = () => isCartOpen && dispatch(setIsCartOpen(false))
+
+  const handleSearch = (value, callback) => {
+    if (!value) {
+      callback([])
+      return
+    }
+
+    let options = []
+    dispatch(setIsLoading(true))
+    api
+      .GET_SEARCHED_PRODUCTS(value)
+      .then((res) => {
+        options = res.map((el) => {
+          return { label: el.name, value: el.product_id }
+        })
+
+        callback(options)
+      })
+      .finally(() => dispatch(setIsLoading(false)))
+  }
+
+  const goToProduct = (product) => {
+    toggleMenu()
+    navigate(`/product/${product.value}`)
+  }
 
   return (
     <header className={css.header}>
@@ -152,6 +180,13 @@ const Header = () => {
         unmountOnExit
       >
         <div className={css.mobile_content}>
+          <Select
+            styled
+            defaultValue="Пошук..."
+            async
+            options={handleSearch}
+            onChange={goToProduct}
+          />
           <div className={css.mobLinks} onClick={toggleMenu}>
             <a
               className={css.link}

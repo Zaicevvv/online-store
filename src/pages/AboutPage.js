@@ -61,16 +61,24 @@ const AboutPage = () => {
         </section>
         <section className={css.aboutContactSection}>
           <h2 className={css.aboutTitle}>Контакти</h2>
-          <p className={css.aboutText}>Компанія: Віталайн з США</p>
-          <p className={css.aboutText}>
-            Телефон:{' '}
-            <a className={css.tel} href="tel:+380689811557">
-              +38(068)981-15-57
-            </a>
+          <p className={`${css.aboutText} ${css.aboutTextStyle}`}>
+            Компанія:{' '}
+            <span className={css.aboutSecondaryText}>Віталайн з США</span>
           </p>
-          <p className={css.aboutText}>Контактна особа: Марія</p>
-          <p className={css.aboutText}>Адреса: Київ, Україна</p>
-          <p>Email та Соціальні мережі:</p>
+          <p className={`${css.aboutText} ${css.aboutTextStyle}`}>
+            Телефон: <a href="tel:+380689811557">+38(068)981-15-57</a>
+          </p>
+          <p className={`${css.aboutText} ${css.aboutTextStyle}`}>
+            Контактна особа:{' '}
+            <span className={css.aboutSecondaryText}>Марія</span>
+          </p>
+          <p
+            className={`${css.aboutText} ${css.aboutTextStyle} ${css.aboutMB}`}
+          >
+            Адреса:{' '}
+            <span className={css.aboutSecondaryText}>Київ, Україна</span>
+          </p>
+          <p className={css.aboutTextStyle}>Email та Соціальні мережі:</p>
           <Social />
         </section>
       </div>

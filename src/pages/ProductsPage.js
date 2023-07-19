@@ -111,7 +111,7 @@ const ProductsPage = () => {
           {pages.map((el) => (
             <Button
               key={el}
-              styled={+page === +el ? 'green' : null}
+              styled={+page === +el ? 'green' : ''}
               onClick={handlePagination.bind(this, el)}
               rippled
             >
