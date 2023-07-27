@@ -31,7 +31,7 @@ const Header = () => {
   }
 
   const handleGoHome = () => {
-    navigate('/products')
+    navigate('/')
     isCartOpen && toggleCart()
   }
 
@@ -75,14 +75,6 @@ const Header = () => {
           <ul className={css.linksList} onClick={handlePageChange}>
             <li className={css.links}>
               <NavLink
-                to="/"
-                className={({ isActive }) => (isActive ? css.active : css.link)}
-              >
-                Превью
-              </NavLink>
-            </li>
-            <li className={css.links}>
-              <NavLink
                 to="/products"
                 className={({ isActive }) => (isActive ? css.active : css.link)}
               >
@@ -106,12 +98,19 @@ const Header = () => {
               </NavLink>
             </li>
           </ul>
+          <Select
+            styled="headerSearch"
+            defaultValue="Пошук..."
+            async
+            options={handleSearch}
+            onChange={goToProduct}
+          />
         </nav>
         <div className={css.cart}>
-          {w > 1120 ? (
+          {w > 1410 ? (
             <a
               className={css.link}
-              style={{ opacity: 1, marginRight: '20px' }}
+              style={{ color: '#F2F3F7', marginRight: '20px' }}
               href="tel:+380689811557"
             >
               +38(068) 981-15-57 - Марія
@@ -181,7 +180,8 @@ const Header = () => {
       >
         <div className={css.mobile_content}>
           <Select
-            styled
+            styled="search"
+            style={{ width: '100%' }}
             defaultValue="Пошук..."
             async
             options={handleSearch}
@@ -190,17 +190,11 @@ const Header = () => {
           <div className={css.mobLinks} onClick={toggleMenu}>
             <a
               className={css.link}
-              style={{ opacity: 1 }}
+              style={{ color: '#F2F3F7' }}
               href="tel:+380689811557"
             >
               +38(068) 981-15-57 - Марія
             </a>
-            <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? css.active : css.link)}
-            >
-              Превью
-            </NavLink>
             <NavLink
               to="/products"
               className={({ isActive }) => (isActive ? css.active : css.link)}

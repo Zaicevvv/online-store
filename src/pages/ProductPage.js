@@ -6,6 +6,7 @@ import {
   setCartItems,
   setIsLoading,
 } from '../features/cart/cart'
+import AnimatedComponent from '../components/AnimatedComponent/AnimatedComponent'
 import Button from '../components/reusable/Button/Button'
 import api from '../config/api'
 import { addToCartSuccess } from '../helpers/notyf'
@@ -56,69 +57,62 @@ const ProductPage = () => {
     setTimeout(() => dispatch(setIsCartOpen(true)), 300)
   }
 
-  const handleGoToProducts = () =>
-    setTimeout(() => {
-      navigate('/products')
-    }, 300)
-
   const handleGoToProduct = (id, e) =>
     setTimeout(() => {
       navigate(`/product/${id}`)
     }, 300)
 
   return (
-    <main className={css.main} ref={pageTopRef}>
-      <div className={css.productMedia}>
-        <div className={css.productWrapper}>
-          <img className={css.productImg} alt="product" src={data.thumb} />
-          <div className={css.productContent}>
-            <p className={css.productName}>{data.meta_title}</p>
-            <p className={css.productPrice}>{data.price}</p>
-            <Button styled="addToCart" rippled onClick={handleAddToCart}>
-              Додати у кошик
-            </Button>
-            <Button styled="addToCart" rippled onClick={handleGoToProducts}>
-              До товарів
-            </Button>
-            <a className={css.productLink} href="tel:+380689811557">
-              +38(068) 981-15-57
-            </a>
-            <p className={css.productLink}>Марія</p>
+    <AnimatedComponent ref={pageTopRef}>
+      <main className={css.main}>
+        <div className={css.productMedia}>
+          <div className={css.productWrapper}>
+            <img className={css.productImg} alt="product" src={data.thumb} />
+            <div className={css.productContent}>
+              <p className={css.productName}>{data.meta_title}</p>
+              <p className={css.productPrice}>{data.price}</p>
+              <Button rippled onClick={handleAddToCart}>
+                Купити
+              </Button>
+            </div>
+          </div>
+          <div className={css.productDescriptionWrapper}>
+            <div className={css.productDescription} ref={myRef}></div>
+            {Object.keys(data).length > 0 && data.products.length > 0 && (
+              <div className={css.productProductsDescription}>
+                <h2 className={css.productProductsDescriptionTitle}>
+                  З цим товаром також замовляють
+                </h2>
+                <ul className={css.productProducts}>
+                  {data.products.map((item) => (
+                    <li
+                      key={item.product_id}
+                      className={css.productProductsItem}
+                    >
+                      <img className={css.img} alt="Product" src={item.thumb} />
+                      <div className={css.productProductsFooter}>
+                        <h2 className={css.productProductsName}>{item.name}</h2>
+                        <Button
+                          styled="invert"
+                          style={{ display: 'block', margin: '0 auto' }}
+                          onClick={handleGoToProduct.bind(
+                            this,
+                            item.product_id,
+                          )}
+                          rippled
+                        >
+                          До товару
+                        </Button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
-        <div className={css.productDescriptionWrapper}>
-          <div className={css.productDescription} ref={myRef}></div>
-          {Object.keys(data).length > 0 && data.products.length > 0 && (
-            <div className={css.productProductsDescription}>
-              <h2 className={css.productProductsDescriptionTitle}>
-                З цим товаром також замовляють
-              </h2>
-              <ul className={css.productProducts}>
-                {data.products.map((item) => (
-                  <li key={item.product_id} className={css.productProductsItem}>
-                    <div
-                      className={css.productProductsImg}
-                      style={{ backgroundImage: `url(${item.thumb})` }}
-                    ></div>
-                    <div className={css.productProductsFooter}>
-                      <h2 className={css.productProductsName}>{item.name}</h2>
-                      <Button
-                        styled="invert"
-                        style={{ display: 'block', margin: '0 auto' }}
-                        onClick={handleGoToProduct.bind(this, item.product_id)}
-                        rippled
-                      >
-                        До товару
-                      </Button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      </div>
-    </main>
+      </main>
+    </AnimatedComponent>
   )
 }
 

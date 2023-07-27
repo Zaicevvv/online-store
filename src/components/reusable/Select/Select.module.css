@@ -10,17 +10,24 @@
   line-height: 19px;
 }
 
-.mb {
+.search {
   margin-bottom: 0;
-  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
-@media screen and (min-width: 1500px) {
-  .mb {
-    position: fixed;
-    top: 30px;
-    left: 770px;
-    z-index: 33;
+.headerSearch {
+  display: none;
+}
+
+@media screen and (min-width: 1170px) {
+  .search {
+    display: none;
+  }
+
+  .headerSearch {
+    display: block;
+    margin-bottom: 0;
     width: 360px;
   }
 }

@@ -19,14 +19,14 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: #66B9EB;
+    background: transparent;
     z-index: -1;
     clip-path: circle(0% at 50% 50%);
     transition: 0.3s ease-in-out;
 }
 
 .button:hover {
-    background: #2fb11e;
+    background: transparent;
 }
 
 .button:hover::before {
@@ -42,9 +42,9 @@
 }
 
 .checkout, .checkout2 {
-    color: #AA6FA8;
-    border-color: #AA6FA8;
-    background: transparent;
+    color: white;
+    border-color: #66B9EB;
+    background: #66B9EB;
     margin: 0 auto;
     display: block;
     margin-bottom: 20px;
@@ -63,9 +63,9 @@
 }
 
 .amount {
-    color: #AA6FA8;
-    border-color: #AA6FA8;
-    background: transparent;
+    color: white;
+    border-color: #66B9EB;
+    background: #66B9EB;
     width: 30px;
     padding: 0;
     padding: 3px;
@@ -75,7 +75,7 @@
     font-size: 16px;
     padding: 0 5px;
     border: none;
-    color: #AA6FA8;
+    color: #66B9EB;
     background: transparent;
 }
 
@@ -116,14 +116,6 @@
     clip-path: circle(0% at 50% 50%);
 }
 
-.main {
-    background: transparent;
-    padding: var(--index) calc(var(--index) * 2);
-    font-size: calc(var(--index) * 1.5);
-    color: rgb(255 255 255 / 0.9);
-    border-color: rgb(255 255 255 / 0.9);
-}
-
 .invert {
     color: var(--black3);
     border-color: var(--black3);
@@ -131,15 +123,28 @@
 }
 
 .green {
-    background: #2fb11e;
+    background: transparent;
 }
 
-.amount:hover, .back:hover, .change:hover, .checkout:hover, .checkout2:hover, .main:hover, .invert:hover {
+.amount::before, .back::before, .change::before, .checkout::before, .checkout2::before {
     background: white;
 }
 
-.main:hover {
-    color: var(--black3);
+.amount:hover, .change:hover, .checkout:hover, .checkout2:hover {
+    background: white;
+    color: #66B9EB;
+}
+
+.back:hover, .invert:hover {
+    background: white;
+}
+
+.pagination {
+    background: #66B9EB;
+}
+
+.pagination:hover, .green:hover, .pagination::before, .green::before {
+    background: transparent;
 }
 
 @media screen and (min-width: 481px) {

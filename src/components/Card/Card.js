@@ -5,43 +5,14 @@ import { CSSTransition } from 'react-transition-group'
 import Button from '../reusable/Button/Button'
 import { addToCartSuccess } from '../../helpers/notyf'
 import information from '../../assets/info.png'
-import CardTransition from './CardTransition.module.css'
+import addToCart from '../../assets/addToCart.svg'
+import CardTransition from './Card2Transition.module.css'
 import css from './Card.module.css'
 
 const Card = ({ product, i }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { items, isCartOpen } = useSelector((state) => state.cart)
   const dispatch = useDispatch()
-
-  let w = window.innerWidth
-
-  const isRight = () => {
-    if (w < 680) {
-      if (i % 2) return css.right
-    } else if (w < 980 || (w > 1023 && w < 1060)) {
-      if (i % 3) return css.right
-    } else if (w < 1280 || (w > 979 && w < 1024)) {
-      if (i % 4) return css.right
-    } else if (w < 1500) {
-      if (i % 5) return css.right
-    } else if (w < 1720) {
-      if (i % 6) return css.right
-    } else if (w < 1940) {
-      if (i % 7) return css.right
-    } else if (w < 2160) {
-      if (i % 8) return css.right
-    } else if (w < 2380) {
-      if (i % 9) return css.right
-    } else if (w < 2600) {
-      if (i % 10) return css.right
-    } else if (w < 2820) {
-      if (i % 11) return css.right
-    } else if (w < 3040) {
-      if (i % 12) return css.right
-    } else {
-      if (i % 13) return css.right
-    }
-  }
 
   const handleHover = (e) => {
     if (e.target.tagName === 'BUTTON' || e.target.tagName === 'SPAN') return
@@ -83,19 +54,20 @@ const Card = ({ product, i }) => {
       onMouseLeave={handleHoverOff}
       onClick={handleHover}
     >
-      {items.find((item) => +item.product_id === +product.product_id) && (
-        <a className={css.info} href={`product/${product.product_id}`}>
-          <img alt="Information" src={information} />
-        </a>
-      )}
-      <div
-        className={css.img}
-        style={{ backgroundImage: `url(${product.thumb})` }}
-      ></div>
+      <a className={css.link} href={`product/${product.product_id}`}>
+        <img className={css.img} alt="Product" src={product.thumb} />
+      </a>
       <div>
-        <p className={css.name}>{product.name}</p>
-        <p className={css.price}>{product.price}</p>
+        <a className={css.link} href={`product/${product.product_id}`}>
+          <p className={css.name}>{product.name}</p>
+          <p className={css.price}>{product.price}</p>
+        </a>
       </div>
+      {!items.find((item) => +item.product_id === +product.product_id) && (
+        <Button rippled onClick={handleAddToCart} style={{ margin: '0 10px' }}>
+          Купити
+        </Button>
+      )}
       <CSSTransition
         in={
           !isCartOpen &&
@@ -106,30 +78,11 @@ const Card = ({ product, i }) => {
         classNames={CardTransition}
         unmountOnExit
       >
-        <div className={`${css.bigWrapper} ${isRight()}`}>
-          <div className={css.container}>
-            <a className={css.info} href={`product/${product.product_id}`}>
-              <img alt="Information" src={information} />
-            </a>
-            <div className={css.descriptionWrapper}>
-              <a className={css.infoN} href={`product/${product.product_id}`}>
-                <p className={css.bigName}>{product.name}</p>
-                <p className={css.description}>{product.meta_description}</p>
-              </a>
-            </div>
-            <a href={`product/${product.product_id}`}>
-              <div
-                className={`${css.img} ${css.bigImg}`}
-                style={{ backgroundImage: `url(${product.thumb})` }}
-              ></div>
-            </a>
-          </div>
-          <div className={css.jcsb_aic}>
-            <p className={css.bigPrice}>{product.price}</p>
-            <Button styled="addToCart" rippled onClick={handleAddToCart}>
-              Додати у кошик
-            </Button>
-          </div>
+        <div className={css.bigWrapper}>
+          <a className={css.link} href={`product/${product.product_id}`}>
+            <p className={css.bigName}>{product.name}</p>
+            <p className={css.description}>{product.meta_description}</p>
+          </a>
         </div>
       </CSSTransition>
     </article>

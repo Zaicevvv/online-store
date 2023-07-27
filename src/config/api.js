@@ -6,7 +6,7 @@ const URL = process.env.REACT_APP_BASE_URL
 const GET_PRODUCTS = (page = 1) =>
   axios
     .get(
-      `${URL}/index.php?route=product/category&path=59&limit=18&page=${page}`,
+      `${URL}/index.php?route=product/category&path=59&limit=20&page=${page}`,
     )
     .then((response) => response.data)
     .catch((er) => {

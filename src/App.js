@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
+import { AnimatePresence } from 'framer-motion'
 import { setCartItems, setFormData, setRadio } from './features/cart/cart'
 import Header from './components/Header/Header'
 import ProductsPage from './pages/ProductsPage'
@@ -33,15 +34,17 @@ const App = () => {
   return (
     <>
       {location.pathname !== '/' && <Header />}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/product/:id" element={<ProductPage />} />
-        <Route path="/about-us" element={<AboutPage />} />
-        <Route path="/articles" element={<ArticlesPage />} />
+      <AnimatePresence mode="wait">
+        <Routes key={location.pathname} location={location}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/about-us" element={<AboutPage />} />
+          <Route path="/articles" element={<ArticlesPage />} />
 
-        <Route path="*" element={<Navigate replace to="/products" />} />
-      </Routes>
+          <Route path="*" element={<Navigate replace to="/" />} />
+        </Routes>
+      </AnimatePresence>
       <CSSTransition
         in={isCartOpen}
         timeout={200}

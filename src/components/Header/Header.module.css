@@ -41,8 +41,7 @@
     position: relative;
     padding: 5px;
     font-size: 20px;
-    color: #F2F3F7;
-    opacity: 0.5;
+    color: #66B9EB;
     text-decoration: none;
     cursor: pointer;
     font-weight: 600; 
@@ -51,25 +50,22 @@
 
 .linksList:hover .links .link{
     transform: scale(1.2);
-    opacity: 1;
     filter: blur(5px)
 }
 
 .linksList:hover .links .active{
     transform: scale(1.2);
-    opacity: 1;
     filter: blur(0px)
 }
 
 .linksList .links .link:hover {
     transform: scale(1.2);
-    opacity: 1;
     filter: blur(0px)
 }
 
 .active {
-    color: #66B9EB;
-    opacity: 1;
+    color: #F2F3F7;
+    opacity: 0.5;
 }
     
 .profile{

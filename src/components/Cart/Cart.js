@@ -142,12 +142,15 @@ const Cart = () => {
         {stage === 2 && <Form />}
         {stage === 1 && items.length > 0 && (
           <p className={css.total}>
-            До оплаты без доставки: $
-            {items.reduce(
-              (acc, item) =>
-                (acc = acc + +item.price.substring(1) * +item.amount),
-              0,
-            )}
+            <span>До оплаты без доставки: </span>
+            <span className={css.totalPrice}>
+              $
+              {items.reduce(
+                (acc, item) =>
+                  (acc = acc + +item.price.substring(1) * +item.amount),
+                0,
+              )}
+            </span>
           </p>
         )}
         {items.length > 0 ? (

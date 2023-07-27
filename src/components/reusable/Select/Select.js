@@ -61,8 +61,9 @@ const Select = ({
   styled,
   defaultValue,
   async,
+  style,
 }) => (
-  <div className={`${css.container} ${styled ? css.mb : ''}`}>
+  <div className={`${css.container} ${css[styled]}`} style={style}>
     {async ? (
       <AsyncSelect
         styles={styled && customStyles}
