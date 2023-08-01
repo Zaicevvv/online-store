@@ -45,6 +45,14 @@ const GET_WAREHOUSES = (ref) =>
       error(er)
     })
 
+const POST_CHECKOUT = (data) =>
+  axios
+    .post(`${URL}/index.php?route=checkout/checkout`, data)
+    .then((response) => response.data)
+    .catch((er) => {
+      error(er)
+    })
+
 const api = {
   URL,
   GET_PRODUCTS,
@@ -52,6 +60,7 @@ const api = {
   GET_SEARCHED_PRODUCTS,
   GET_CITIES,
   GET_WAREHOUSES,
+  POST_CHECKOUT,
 }
 
 export default api

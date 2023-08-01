@@ -70,6 +70,7 @@
 }
 
 .article_text__wrapper__active {
+    padding-top: 20px;
     grid-template-rows: 1fr;
 }
 

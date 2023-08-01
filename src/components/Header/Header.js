@@ -110,7 +110,7 @@ const Header = () => {
           {w > 1410 ? (
             <a
               className={css.link}
-              style={{ color: '#F2F3F7', marginRight: '20px' }}
+              style={{ color: '#F2F3F7', marginRight: '20px', width: 'auto' }}
               href="tel:+380689811557"
             >
               +38(068) 981-15-57 - Марія
@@ -140,7 +140,7 @@ const Header = () => {
         <div className={css.mobHeaderContainer}>
           <a
             className={css.link}
-            style={{ opacity: 1 }}
+            style={{ opacity: 1, width: 'auto' }}
             href="tel:+380689811557"
           >
             <img className={css.call} alt="call" src={call} />

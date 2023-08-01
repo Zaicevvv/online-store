@@ -46,6 +46,7 @@
 .formTitle {
     display: inline-block;
     margin-bottom: 10px;
+    color: var(--gray5);
 }
 
 .required {
@@ -57,14 +58,14 @@
 .telInput {
     width: 100%;
     height: 40px;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
     line-height: 19px;
     border: 1px solid var(--gray);
     border-radius: 6px;
     outline: none;
     text-indent: 10px;
-    color: var(--gray2) !important;
+    color: black !important;
     margin-bottom: 10px;
   }
   
@@ -147,6 +148,15 @@
 .np {
     display: flex;
     align-items: flex-start;
+}
+
+.gray {
+    color: var(--gray5);
+}
+
+.black {
+    color: black;
+    font-weight: 600;
 }
 
 @media screen and (min-width: 768px) {

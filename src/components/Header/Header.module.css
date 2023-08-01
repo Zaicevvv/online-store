@@ -38,6 +38,7 @@
 
 .link, .active {
     display: block;
+    width: 100%;
     position: relative;
     padding: 5px;
     font-size: 20px;
@@ -180,6 +181,10 @@
 
 .mobHeaderContainer {
     display: flex;
+}
+
+.db {
+    display: block;
 }
 
 @media screen and (max-width: 900px) {

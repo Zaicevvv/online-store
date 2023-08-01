@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import AnimatedComponent from '../components/AnimatedComponent/AnimatedComponent'
 import Social from '../components/reusable/Social/Social'
 import css from './pages.module.css'
 
 const AboutPage = () => {
+  const pageTopRef = useRef(null)
+
   useEffect(() => {
     document.title = 'Vitaline'
+    pageTopRef.current.scrollIntoView()
   }, [])
 
   return (
     <AnimatedComponent>
-      <main className={css.main}>
+      <main className={css.main} ref={pageTopRef}>
         <div className={css.aboutWrapper}>
           <section className={css.aboutInfoSection}>
             <h1 className={css.aboutTitle}>Про нас</h1>

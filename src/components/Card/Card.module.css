@@ -53,7 +53,8 @@
 .price {
     text-align: center;
     color: white;
-    font-size: 20px;
+    font-weight: 600;
+    font-size: 24px;
     margin-bottom: 5px;
 }
 

@@ -11,7 +11,7 @@ const notyf = new Notyf({
     },
     {
       type: 'success',
-      backgroundColor: '#AA6FA8',
+      backgroundColor: '#66B9EB',
     },
   ],
 })

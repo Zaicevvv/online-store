@@ -24,6 +24,7 @@ const Article = ({ el, active, handleToggle, goToProduct }) => {
             alt="product"
             src={el.img}
             onClick={el.product_id && goToProduct.bind(this, el.product_id)}
+            style={el.product_id ? { cursor: 'pointer' } : null}
           />
           <div className={css.article_header__text}>
             <h2 className={css.article_header__title}>{el.title}</h2>

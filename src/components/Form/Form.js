@@ -81,6 +81,7 @@ const Form = () => {
       return
     }
     setContactDetails(!contactDetails)
+    dispatch(setIsToSent(!isToSent))
   }
 
   const handleDeliveryDetails = () => {
@@ -208,9 +209,15 @@ const Form = () => {
       </div>
       {contactDetails && (
         <div className={css.preview}>
-          <p className={css.small}>Телефон: {formData.tel}</p>
-          <p className={css.small}>Прізвище: {formData.lastName}</p>
-          <p className={css.small}>Ім'я: {formData.firstName}</p>
+          <p className={`${css.small} ${css.gray}`}>
+            Телефон: <span className={css.black}>{formData.tel}</span>
+          </p>
+          <p className={`${css.small} ${css.gray}`}>
+            Прізвище: <span className={css.black}>{formData.lastName}</span>
+          </p>
+          <p className={`${css.small} ${css.gray}`}>
+            Ім'я: <span className={css.black}>{formData.firstName}</span>
+          </p>
         </div>
       )}
       <div
@@ -291,15 +298,23 @@ const Form = () => {
           </div>
           {deliveryDetails && radio === 'post' && (
             <div className={css.preview}>
-              <p className={css.small}>Місто: {formData.city.label}</p>
-              <p className={css.small}>Відділення: {formData.spot.label}</p>
+              <p className={`${css.small} ${css.gray}`}>
+                Місто: <span className={css.black}>{formData.city.label}</span>
+              </p>
+              <p className={`${css.small} ${css.gray}`}>
+                Відділення:{' '}
+                <span className={css.black}>{formData.spot.label}</span>
+              </p>
             </div>
           )}
           {deliveryDetails && radio === 'self' && (
             <div className={css.preview}>
-              <p className={css.small}>Заберу сам(а)</p>
-              <p className={css.small}>
-                За адресою: Місто Київ, Оболонський район, біля метро Мінська
+              <p className={`${css.small} ${css.gray}`}>Заберу сам(а)</p>
+              <p className={`${css.small} ${css.gray}`}>
+                За адресою:{' '}
+                <span className={css.black}>
+                  Місто Київ, Оболонський район, біля метро Мінська
+                </span>
               </p>
             </div>
           )}
@@ -410,9 +425,12 @@ const Form = () => {
           </div>
           {radio === 'self' && (
             <div className={css.previewFirst}>
-              <p className={css.small}>Заберу сам(а)</p>
-              <p className={css.small}>
-                За адресою: Місто Київ, Оболонський район, біля метро Мінська
+              <p className={`${css.small} ${css.gray}`}>Заберу сам(а)</p>
+              <p className={`${css.small} ${css.gray}`}>
+                За адресою:{' '}
+                <span className={css.black}>
+                  Місто Київ, Оболонський район, біля метро Мінська
+                </span>
               </p>
             </div>
           )}

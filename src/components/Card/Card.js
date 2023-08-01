@@ -62,12 +62,16 @@ const Card = ({ product, i }) => {
           <p className={css.name}>{product.name}</p>
           <p className={css.price}>{product.price}</p>
         </a>
+        {!items.find((item) => +item.product_id === +product.product_id) && (
+          <Button
+            rippled
+            onClick={handleAddToCart}
+            style={{ width: 'calc(100% - 20px)', margin: '0 10px' }}
+          >
+            Купити
+          </Button>
+        )}
       </div>
-      {!items.find((item) => +item.product_id === +product.product_id) && (
-        <Button rippled onClick={handleAddToCart} style={{ margin: '0 10px' }}>
-          Купити
-        </Button>
-      )}
       <CSSTransition
         in={
           !isCartOpen &&

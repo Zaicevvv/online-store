@@ -63,8 +63,8 @@ const ProductPage = () => {
     }, 300)
 
   return (
-    <AnimatedComponent ref={pageTopRef}>
-      <main className={css.main}>
+    <AnimatedComponent>
+      <main className={css.main} ref={pageTopRef}>
         <div className={css.productMedia}>
           <div className={css.productWrapper}>
             <img className={css.productImg} alt="product" src={data.thumb} />

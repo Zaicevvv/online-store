@@ -3,10 +3,15 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Button from '../reusable/Button/Button'
 import Form from '../Form/Form'
-import { setCartItems, setIsCartOpen } from '../../features/cart/cart'
+import {
+  setCartItems,
+  setIsCartOpen,
+  setIsLoading,
+} from '../../features/cart/cart'
 import cancel from '../../assets/cancel.svg'
 import cart from '../../assets/cart.svg'
 import { checkoutSuccess } from '../../helpers/notyf'
+import api from '../../config/api'
 import css from './Cart.module.css'
 
 const Cart = () => {
@@ -44,15 +49,34 @@ const Cart = () => {
     setTimeout(() => {
       if (stage === 1) return setStage(2)
       if (isToSent) {
-        checkoutSuccess()
-        // console.log(items, {
-        //   ...formData,
-        //   city: formData.city.label,
-        //   spot: formData.spot.label,
-        // }) &&
-        dispatch(setCartItems([]))
-        localStorage.setItem('items', JSON.stringify([]))
-        handleClose()
+        const dataToSent = {
+          products: items.map((el) => {
+            return { id: el.product_id, name: el.name, quantity: el.amount }
+          }),
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          phone_number: formData.tel,
+          shipment_method: formData.self ? 'Самовывоз' : 'Новая Почта',
+          city: formData.city ? formData.city.label : '-',
+          address: formData.spot ? formData.spot.label : '-',
+          comment: '',
+          total_price: items.reduce(
+            (acc, item) =>
+              (acc = acc + +item.price.substring(1) * +item.amount),
+            0,
+          ),
+        }
+
+        dispatch(setIsLoading(true))
+        api
+          .POST_CHECKOUT(dataToSent)
+          .then(() => {
+            checkoutSuccess()
+            dispatch(setCartItems([]))
+            localStorage.setItem('items', JSON.stringify([]))
+            handleClose()
+          })
+          .finally(() => dispatch(setIsLoading(false)))
       }
     }, 300)
 
@@ -142,7 +166,7 @@ const Cart = () => {
         {stage === 2 && <Form />}
         {stage === 1 && items.length > 0 && (
           <p className={css.total}>
-            <span>До оплаты без доставки: </span>
+            <span>До оплати без доставки: </span>
             <span className={css.totalPrice}>
               $
               {items.reduce(
